@@ -1,0 +1,102 @@
+<section class="vh-100 my-3">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4" #form="ngForm" (submit)="register()" >
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input placeholder="Your Username" type="text" id="username" minlength="3" maxlength="32" required
+                             class="form-control" [(ngModel)]="model.username"
+                             name="username" #username="ngModel"/>
+                      <div [hidden]="username.valid || username.pristine"
+                           class="alert alert-danger small">
+                        Username must be between 3 and 32 characters long
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input placeholder="Your Email" type="email" id="email" class="form-control"
+                             required
+                             email
+                             [(ngModel)]="model.email"
+                             name="email" #email="ngModel"/>
+                      <div [hidden]="email.valid || email.pristine"
+                           class="alert alert-danger small">
+                        Please enter a valid email
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input placeholder="Password" type="password" id="password" class="form-control"
+                             [(ngModel)]="model.password"
+                             required
+                             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$"
+                           name="password" #password="ngModel"/>
+                      <div [hidden]="password.valid || password.pristine"
+                           class="alert alert-danger small">
+                        Password must be between 8 and 32 characters, must contain at least 1 capital letter, 1 digit and 1 non-alphanumeric character
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input placeholder="Repeat your password" type="password" id="confirmPassword"
+                             class="form-control" [(ngModel)]="model.confirmPassword"
+                             required
+                             pattern="{{escapeRegExp(model.password)}}"
+                      name="confirmPassword" #confirmPassword="ngModel" />
+                      <div [hidden]="confirmPassword.valid || confirmPassword.pristine"
+                           class="alert alert-danger small">
+                        Confirm password must be the same as the password
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input bg-primary me-2" id="hasAgreed" type="checkbox"
+                           [(ngModel)]="model.hasAgreed"
+                           required
+                           name="hasAgreed"
+                           style="border: none"/>
+                    <label class="form-check-label" for="hasAgreed">
+                      I agree all statements in <a href="terms_and_conditions">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="!form.valid">Register</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                     class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
