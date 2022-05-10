@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoginForm} from "./LoginForm";
+import {UserService} from "../user.service";
+import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  model: LoginForm = new LoginForm('', '')
+
+  constructor(public userService: UserService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
+  }
+
+  login(): void {
+    this.userService.login(this.model).subscribe({
+      next: res => {
+        console.log(res)
+        localStorage.setItem('access_token', res.access_token)
+        localStorage.setItem('refresh_token', res.refresh_token)
+        localStorage.setItem('expires_at', res.expires_at.toString())
+        this.toastr.success('successfully logged in')
+      },
+      error: (err: HttpErrorResponse) => {
+        this.toastr.error(err.status == 401 ? 'Wrong email or password' : 'Something went wrong, try again later')
+      }
+    });
   }
 
 }
