@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {UserService} from "./user.service";
 import {ToastrService} from "ngx-toastr";
+import {Router, Routes} from "@angular/router";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -15,7 +16,8 @@ export class JwtInterceptor implements HttpInterceptor {
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private userService: UserService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,13 +27,13 @@ export class JwtInterceptor implements HttpInterceptor {
     if (token != null) {
       authReq = this.addTokenHeader(req, token);
     }
-
-    return next.handle(authReq).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && !authReq.url.includes('login') && error.status === 401) {
+    console.log('yea')
+    return next.handle(authReq).pipe(catchError(err => {
+      if (!authReq.url.includes('/login') && (err.status == 401 || err.status == 403)) {
         return this.handle401Error(authReq, next);
       }
 
-      return throwError(error);
+      return throwError(err);
     }));
   }
 
@@ -39,17 +41,22 @@ export class JwtInterceptor implements HttpInterceptor {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
+      let refreshToken = localStorage.getItem('refresh_token');
 
-      const token = localStorage.getItem('refresh_token')
       if (this.userService.isLoggedOut()) {
         //refresh token
-        let refreshToken = localStorage.getItem('refresh_token')
-        // @ts-ignore
+
+        if (refreshToken == null) {
+          this.router.navigateByUrl('/login');
+          return next.handle(request);
+        }
+        localStorage.removeItem('access_token')
         this.userService.refreshToken(refreshToken)
           .subscribe({
             next: res => {
               localStorage.setItem('refresh_token', res.refresh_token)
               localStorage.setItem('access_token', res.access_token)
+              localStorage.setItem('expires_at', res.expires_at.toString())
               console.log('token refreshed')
               return next.handle(this.addTokenHeader(request, res.access_token));
             },
@@ -57,8 +64,8 @@ export class JwtInterceptor implements HttpInterceptor {
           })
 
       } else {
-        //no access
-        console.log('Permission denied')
+        this.router.navigateByUrl('/login');
+        return next.handle(request);
       }
     }
 

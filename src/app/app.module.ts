@@ -13,8 +13,9 @@ import { TermsComponent } from './terms/terms.component';
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "./jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,15 +27,17 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginForm} from "./login/LoginForm";
 import {LoginResponse} from "./login/LoginResponse";
-import {RefreshPayload} from "./RefreshPayload";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +12,10 @@ export class UserService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'multipart/form-data; charset=UTF-8'
+      'Content-Type': 'application/json; charset=utf-8'
     })
   };
+
 
   constructor(private http: HttpClient) {
   }
@@ -29,6 +29,11 @@ export class UserService {
     let formData = new FormData();
     formData.append('username', model.username);
     formData.append('password', model.password);
+    let httpMultipart = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data; charset=UTF-8'
+      })
+    };
     return this.http.post<LoginResponse>("http://localhost:8080/login", formData)
   }
 
@@ -46,13 +51,17 @@ export class UserService {
     return !this.isLoggedOut();
   }
 
-  refreshToken(token: string): Observable<RefreshPayload> {
-    let httpRefreshHeader = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token
-      })
+  refreshToken(token: string): Observable<LoginResponse> {
+    const headerDict = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Accept': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
     };
-    return this.http.get<RefreshPayload>("http://localhost:8080/api/user/refreshToken", httpRefreshHeader);
+    return this.http.get<LoginResponse>("http://localhost:8080/api/user/refreshToken", requestOptions);
   }
 
   test(): String {
