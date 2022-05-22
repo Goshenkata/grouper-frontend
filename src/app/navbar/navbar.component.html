@@ -1,23 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="navbar navbar-expand sticky-top shadow-sm border-bottom"
+     [ngClass]="uiService.isLightMode() ? ['navbar-light', 'bg-light', 'text-dark'] : ['navbar-dark', 'bg-dark', 'text-light', 'border-secondary']">
   <div class="container-fluid d-flex justify-content-between">
-    <a class="navbar-brand" href="#">
-      <img class="me-2" id="logo" src="assets/images/logo.png" alt="Grouper logo">
+    <a class="navbar-brand fw-bolder" href="#">
+      <img class="me-2" id="logo"
+           [src]="uiService.isLightMode() ? 'assets/images/logo.png' : 'assets/images/logo-dark.png'"
+           alt="Grouper logo">
       Grouper</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex m-auto">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-inline-flex m-auto col-3 ">
+        <label for="search">
+          <fa-icon [icon]="['fas', 'search']" class="fa-2x mx-2 my-auto mx-1 d-inline-block"></fa-icon>
+        </label>
+        <input id="search"
+               [ngClass]="uiService.isLightMode() ? 'bg-light' : ['bg-secondary', 'border-dark', 'light-class']"
+               [style]="uiService.isLightMode() ? 'color:var(--bs-dark);' : 'color:var(--bs-light);'"
+               type="Search"
+               placeholder="Search" aria-label="Search" class="form-control rounded-pill ">
+
       </form>
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="login"><button class="btn me-2 btn-secondary">Log in</button></a>
+      <ul *ngIf="this.userService.isLoggedOut()" class="d-inline-block navbar-nav flex-row justify-content-end">
+        <li class="nav-item d-inline-block poi" (click)="uiService.switchTheme()">
+          <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']" class="fa-2xl mx-1 pointer "></fa-icon>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="registration"><button class="btn btn-primary me-2 ">Sign up</button></a>
+        <li class="nav-item d-inline-block">
+          <a class="nav-link" routerLink="login">
+            <button class="btn btn-secondary ">Log in</button>
+          </a>
+        </li>
+        <li class="nav-item d-inline-block">
+          <a class="nav-link" routerLink="registration">
+            <button class="btn btn-primary ">Sign up</button>
+          </a>
         </li>
       </ul>
     </div>

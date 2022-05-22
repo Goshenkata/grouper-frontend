@@ -7,8 +7,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from './registration/registration.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faUser} from "@fortawesome/free-solid-svg-icons";
 import { TermsComponent } from './terms/terms.component';
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -16,6 +14,7 @@ import {ToastrModule} from "ngx-toastr";
 import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./jwt.interceptor";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +23,7 @@ import {JwtInterceptor} from "./jwt.interceptor";
     RegistrationComponent,
     TermsComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +42,5 @@ import {JwtInterceptor} from "./jwt.interceptor";
 })
 export class AppModule {
   constructor() {
-    library.add(faUser)
   }
 }

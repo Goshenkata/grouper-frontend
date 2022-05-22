@@ -3,6 +3,7 @@ import {LoginForm} from "./LoginForm";
 import {UserService} from "../user.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UiService} from "../ui.service";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   model: LoginForm = new LoginForm('', '')
 
   constructor(public userService: UserService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              public uiService: UiService) {
   }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', res.access_token)
         localStorage.setItem('refresh_token', res.refresh_token)
         localStorage.setItem('expires_at', res.expires_at.toString())
+        localStorage.setItem('expires_at', res.username)
         this.toastr.success('successfully logged in')
       },
       error: (err: HttpErrorResponse) => {

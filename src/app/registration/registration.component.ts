@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UiService} from "../ui.service";
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private userService: UserService,
               private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              public uiService: UiService) {
   }
 
   ngOnInit(): void {

@@ -1,2 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+.pointer:hover {
+  cursor: pointer;
+}
+
+
+.light-class::placeholder {
+  color: var(--bs-light)!important;
+}
+.bg-black-pic {
+  background-image: url("assets/images/black-bg.webp");
+  background-repeat: repeat;
+}
+.bg-lightgray {
+  background-color: #dae0e6;
+}

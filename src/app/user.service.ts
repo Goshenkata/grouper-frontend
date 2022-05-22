@@ -41,6 +41,7 @@ export class UserService {
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
     localStorage.removeItem('expires_at')
+    localStorage.removeItem('username')
   }
 
   isLoggedOut(): boolean {
