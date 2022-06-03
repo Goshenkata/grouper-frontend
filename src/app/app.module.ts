@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FooterComponent } from './footer/footer.component';
     TermsComponent,
     LoginComponent,
     FooterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

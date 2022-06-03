@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../user.service";
+import {UiService} from "../ui.service";
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public uiService: UiService) { }
 
   ngOnInit(): void {
   }

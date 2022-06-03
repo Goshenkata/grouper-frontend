@@ -20,7 +20,7 @@
       </form>
       <ul *ngIf="this.userService.isLoggedOut()" class="d-inline-block navbar-nav flex-row justify-content-end">
         <li class="nav-item d-inline-block poi" (click)="uiService.switchTheme()">
-          <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']" class="fa-2xl mx-1 pointer "></fa-icon>
+          <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']" class="fa-2xl mx-1 pointer"></fa-icon>
         </li>
         <li class="nav-item d-inline-block">
           <a class="nav-link" routerLink="login">
