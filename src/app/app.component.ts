@@ -1,5 +1,15 @@
 import {Component} from '@angular/core';
-import {faEnvelope, faKey, faLock, faMoon, faSearch, faSun, faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faClose,
+  faEnvelope,
+  faKey,
+  faLock,
+  faMoon,
+  faSearch,
+  faSun,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {UiService} from "./ui.service";
 import {faAngular, faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
@@ -24,6 +34,8 @@ export class AppComponent {
       faGithub,
       faLinkedin,
       faAngular,
+      faBars,
+      faClose
     );
   }
 }

@@ -9,9 +9,17 @@ import {UiService} from "../ui.service";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public userService: UserService, public uiService: UiService) { }
+  public expand: boolean;
+
+  constructor(public userService: UserService, public uiService: UiService) {
+    this.expand=false;
+  }
 
   ngOnInit(): void {
+  }
+
+  switchExpand() {
+    this.expand = !this.expand;
   }
 
 }
