@@ -16,6 +16,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
+import { FeedComponent } from './feed/feed.component';
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { AboutComponent } from './about/about.component';
     LoginComponent,
     FooterComponent,
     AboutComponent,
+    FeedComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { AboutComponent } from './about/about.component';
     FontAwesomeModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

@@ -27,7 +27,6 @@ export class JwtInterceptor implements HttpInterceptor {
     if (token != null) {
       authReq = this.addTokenHeader(req, token);
     }
-    console.log('yea')
     return next.handle(authReq).pipe(catchError(err => {
       if (!authReq.url.includes('/login') && (err.status == 401 || err.status == 403)) {
         return this.handle401Error(authReq, next);
