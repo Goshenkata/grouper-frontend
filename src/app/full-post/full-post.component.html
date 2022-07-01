@@ -1,0 +1,8 @@
+<div class="container">
+  <app-post [post]="getPost()" xmlns:th="http://www.w3.org/1999/html"></app-post>
+  <hr>
+  <div *ngFor="let comment of fullPost.comments">
+    <app-comment [comment]="comment"></app-comment>
+    <hr>
+  </div>
+</div>

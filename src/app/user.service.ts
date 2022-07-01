@@ -64,7 +64,6 @@ export class UserService {
     };
     return this.http.get<LoginResponse>("http://localhost:8080/api/user/refreshToken", requestOptions);
   }
-
   test(): String {
    let end: String = 'fail';
    this.http.get<String>("http://localhost:8080/api/user/test", this.httpOptions)

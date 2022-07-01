@@ -1,0 +1,22 @@
+<div class="my-1 mx-3 border-light border-start rounded-start">
+  <div class="card row"
+       [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
+  >
+    <div class="row g-0">
+      <div *ngIf="comment.image != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'" (click)="fullScreen=!fullScreen">
+        <img src="{{comment.image?.url}}" class="img-fluid rounded-start" alt="image of post">
+      </div>
+      <div [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
+        <div class="card-body">
+          <div class="d-inline-block d-sm-flex justify-content-between">
+            <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+          </div>
+          <p class="card-text pt-2 pt-sm-0">{{comment.contents}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let reply of comment.replies" class="ms-3">
+    <app-comment [comment]="reply"></app-comment>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="m-3 card row"
+     [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
+>
+  <div class="row g-0">
+    <div *ngIf="post.postType=='IMAGE'" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'" (click)="fullScreen=!fullScreen">
+      <img src="{{post.image?.url}}" class="img-fluid rounded-start" alt="image of post">
+    </div>
+    <div [ngClass]="post.postType=='IMAGE' ? 'col-md-8' : 'col-md-12'">
+      <div class="card-body">
+        <div class="d-inline-block d-sm-flex justify-content-between">
+          <h4 class="card-title">{{post.title}}</h4>
+          <small class="text-muted">Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+        </div>
+        <p class="card-text pt-2 pt-sm-0">{{post.content}}</p>
+        <p class="card-text d-inline-block">
+          <small class="text-muted">{{post.commentCount}} comments</small></p>
+        <p class="card-text"></p>
+      </div>
+    </div>
+  </div>
+</div>

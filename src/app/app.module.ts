@@ -18,6 +18,10 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { PostComponent } from './post/post.component';
+import { FullPostComponent } from './full-post/full-post.component';
+import { CommentComponent } from './comment/comment.component';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -29,8 +33,12 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
     FooterComponent,
     AboutComponent,
     FeedComponent,
+    PostComponent,
+    FullPostComponent,
+    CommentComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -39,7 +47,7 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

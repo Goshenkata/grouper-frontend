@@ -7,27 +7,8 @@
     class="list-unstyled container"
 >
   <li *ngFor="let post of feed">
-    <a href="/post/{{post.id}}" class="text-decoration-none text-light">
-      <div class="m-3 card row bg-dark">
-        <div class="row g-0">
-          <div *ngIf="post.postType=='IMAGE'" class="col-md-4">
-            <img src="{{post.image?.url}}" class="img-fluid rounded-start" alt="image of post">
-          </div>
-          <div [ngClass]="post.postType=='IMAGE' ? 'col-md-8' : 'col-md-12'">
-            <div class="card-body">
-              <div class="d-inline-block d-sm-flex justify-content-between">
-                <h4 class="card-title">{{post.title}}</h4>
-                <small class="text-muted">Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
-              </div>
-              <p class="card-text pt-2 pt-sm-0">{{post.content}}</p>
-              <p class="card-text d-inline-block">
-                <button class="btn btn-primary me-3">Reply</button>
-                <small class="text-muted">{{post.commentCount}} comments</small></p>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <a class="pointer text-decoration-none" (click)="navToPost(post.id)">
+    <app-post [post]="post"></app-post>
     </a>
   </li>
 </ul>
