@@ -4,6 +4,7 @@ import {PostService} from "../post.service";
 import {FullPost} from "./full-post";
 import {ToastrService} from "ngx-toastr";
 import {Post} from "../post/post";
+import {ReplyTo} from "../reply/ReplyTo";
 
 @Component({
   selector: 'app-full-post',
@@ -12,6 +13,7 @@ import {Post} from "../post/post";
 })
 export class FullPostComponent implements OnInit {
   fullPost!: FullPost;
+  public ReplyTo = ReplyTo;
 
   constructor(private route: ActivatedRoute,
               private postService: PostService,

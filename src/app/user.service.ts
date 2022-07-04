@@ -29,11 +29,9 @@ export class UserService {
     let formData = new FormData();
     formData.append('username', model.username);
     formData.append('password', model.password);
-    let httpMultipart = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data; charset=UTF-8'
-      })
-    };
+    new HttpHeaders({
+      'Content-Type': 'multipart/form-data; charset=UTF-8'
+    });
     return this.http.post<LoginResponse>("http://localhost:8080/login", formData)
   }
 

@@ -1,4 +1,4 @@
-<div class="my-1 mx-3 border-light border-start rounded-start">
+<section class="m-0 ps-3 py-1 border-start rounded-start" [ngClass]="uiService.isLightMode() ? 'border-light' : 'border-dark'">
   <div class="card row"
        [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
   >
@@ -19,4 +19,4 @@
   <div *ngFor="let reply of comment.replies" class="ms-3">
     <app-comment [comment]="reply"></app-comment>
   </div>
-</div>
+</section>

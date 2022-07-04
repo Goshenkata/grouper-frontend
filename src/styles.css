@@ -15,3 +15,10 @@
 .bg-lightgray {
   background-color: #dae0e6;
 }
+.tox-notifications-container {
+  display: none !important;
+}
+
+.tox-statusbar__branding {
+  display: none !important;
+}

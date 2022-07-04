@@ -1,8 +1,11 @@
 <div class="container">
-  <app-post [post]="getPost()" xmlns:th="http://www.w3.org/1999/html"></app-post>
+  <app-post [post]="getPost()"></app-post>
   <hr>
-  <div *ngFor="let comment of fullPost.comments">
-    <app-comment [comment]="comment"></app-comment>
-    <hr>
+  <div class="ms-3 me-4">
+    <app-reply [id]="fullPost.id" [replyTo]="ReplyTo.POST"></app-reply>
+    <div *ngFor="let comment of fullPost.comments">
+      <app-comment [comment]="comment"></app-comment>
+      <hr>
+    </div>
   </div>
 </div>

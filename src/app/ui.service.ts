@@ -1,5 +1,5 @@
-import {HostListener, Injectable} from '@angular/core';
-import {keyframes} from "@angular/animations";
+import {EventEmitter, HostListener, Injectable, Output} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +7,11 @@ import {keyframes} from "@angular/animations";
 export class UiService {
 
   public mobile: boolean;
+  public theme: string;
 
   constructor() {
     this.mobile = window.screen.width <= 480;
+    this.theme='light'
   }
 
   @HostListener('window:resize')
@@ -17,8 +19,9 @@ export class UiService {
     this.mobile = window.screen.width <= 480;
   }
 
-  private getTheme(): string {
-    return localStorage.getItem("theme") || "light";
+  public getTheme(): string {
+    this.theme = localStorage.getItem("theme") || "light";
+    return this.theme;
   }
 
   public isDarkMode(): boolean {
@@ -34,6 +37,10 @@ export class UiService {
       localStorage.setItem("theme", "light");
     } else {
       localStorage.setItem("theme", "dark");
+    }
+    //tinymc cannot change theme dynamically so it must be reloaded
+    if(/^(\/post\/\d)$/.test(location.pathname)) {
+      location.reload();
     }
   }
 

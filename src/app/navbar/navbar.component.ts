@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UserService} from "../user.service";
 import {UiService} from "../ui.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +9,22 @@ import {UiService} from "../ui.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
   public expand: boolean;
 
-  constructor(public userService: UserService, public uiService: UiService) {
+
+  constructor(public userService: UserService,
+              public uiService: UiService) {
     this.expand=false;
   }
 
   ngOnInit(): void {
   }
 
-  switchExpand() {
+  switch(): void {
+    this.uiService.switchTheme();
+  }
+
+  ExpandEv() {
     this.expand = !this.expand;
   }
 

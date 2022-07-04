@@ -1,0 +1,29 @@
+<form
+  class="my-3 rounded-3"
+  (submit)="postReply()">
+  <editor
+    (onSaveContent)="postReply()"
+    [(ngModel)]="replyData.content"
+    name="post-reply"
+    [init]="{
+     height: 300,
+     menubar: false,
+     content_css: uiService.isLightMode() ? 'bootstrap' : 'dark',
+     skin: uiService.isLightMode() ? 'bootstrap' : 'tinymce-5-dark',
+     plugins:
+       'advlist autolink lists link image charmap anchor save visualblocks media table paste code',
+     toolbar:
+       'undo redo | bold italic strikethrough superscript subscript | h1 h2 | bullist numlist link | styleselect fontselect fonsizeselect formatselect | hr blockquote | alignleft aligncenter alignright alignjustify | outdent indent | removeformat save '
+   }"
+    class="col-12"
+  >
+  </editor>
+  <div class="col-12 m-2 d-flex justify-content-between">
+    <label for="file" class="btn btn-primary">Choose an image (optional)</label>
+    <input name="file" type="file" id="file" (change)="onFileSelected($event)" class="file-input d-inline-block visually-hidden" accept=".png, .jpg, .jpeg, .gif, .webp"/>
+    <button type="submit" class="btn btn-primary d-inline-block">
+      Comment
+    </button>
+  </div>
+</form>
+<hr>

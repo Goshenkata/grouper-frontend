@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationComponent } from './registration/registration.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TermsComponent } from './terms/terms.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { LoginComponent } from './login/login.component';
@@ -22,6 +22,8 @@ import { PostComponent } from './post/post.component';
 import { FullPostComponent } from './full-post/full-post.component';
 import { CommentComponent } from './comment/comment.component';
 import {CommonModule} from "@angular/common";
+import {EditorModule} from "@tinymce/tinymce-angular";
+import { ReplyComponent } from './reply/reply.component';
 
 @NgModule({
   declarations: [
@@ -36,19 +38,22 @@ import {CommonModule} from "@angular/common";
     PostComponent,
     FullPostComponent,
     CommentComponent,
+    ReplyComponent,
   ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NgbModule,
-    FontAwesomeModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    InfiniteScrollModule,
-  ],
+    imports: [
+        CommonModule,
+        EditorModule,
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NgbModule,
+        FontAwesomeModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        InfiniteScrollModule,
+        ReactiveFormsModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],

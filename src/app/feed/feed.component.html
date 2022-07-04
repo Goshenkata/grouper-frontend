@@ -7,9 +7,12 @@
     class="list-unstyled container"
 >
   <li *ngFor="let post of feed">
-    <a class="pointer text-decoration-none" (click)="navToPost(post.id)">
+    <a class="pointer text-decoration-none " (click)="navToPost(post.id)">
     <app-post [post]="post"></app-post>
     </a>
   </li>
 </ul>
+<style>
+    .mce-notification {display: none !important;}
+</style>
 <app-footer></app-footer>

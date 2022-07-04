@@ -26,8 +26,8 @@
 
         </form>
         <ul *ngIf="this.userService.isLoggedOut()"
-            class="d-none d-sm-inline-block navbar-nav flex-row justify-content-end">
-          <li class="nav-item d-inline-block poi" (click)="uiService.switchTheme()">
+            class="d-none d-sm-inline-block navbar-nav fl-row justify-content-end">
+          <li class="nav-item d-inline-block poi" (click)="switch()">
             <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']"
                      class="fa-2xl mx-1 pointer"></fa-icon>
           </li>
@@ -42,7 +42,7 @@
             </a>
           </li>
         </ul>
-        <button class="navbar-toggler text-dark d-block d-sm-none" type="button" (click)="switchExpand()">
+        <button class="navbar-toggler text-dark d-block d-sm-none" type="button" (click)="ExpandEv()">
         <span>
           <fa-icon [icon]="expand ? ['fas', 'close'] : ['fas', 'bars']"
                    [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
