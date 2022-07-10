@@ -1,0 +1,17 @@
+<div (mouseover)="hover=true" (mouseout)="hover = false" (click)="expand = !expand" [ngClass]="hover ? 'border border-secondary border-1' : ''">
+  <a class="nav-link dropdown-toggle"
+     href="#"
+     [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+     id="navbarDropdownMenuLink"
+     role="button"
+     data-toggle="dropdown"
+     aria-haspopup="true"
+     aria-expanded="false">
+    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40"
+         height="40" class="rounded-circle" alt="your profile picture">
+    <small class="align-middle ms-3 me-4 h5">Cock</small>
+  </a>
+  <div class="dropdown-menu" [ngClass]="expand ? uiService.isLightMode() ? ['bg-light', 'show'] : ['show', 'bg-dark'] : ''" aria-labelledby="navbarDropdownMenuLink">
+    <a class="dropdown-item" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'" (click)="userService.logout()" href="#">Log Out</a>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Reply} from "./reply/reply";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -8,21 +8,17 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class CommentService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  postComment(replyData: Reply): Observable<void> {
+  postComment(replyData: Reply): Observable<any> {
     let formData = new FormData();
     formData.append('id', replyData.id.toString());
     formData.append('content', replyData.content);
-    formData.append('responseType', replyData.responeType.toString());
+    formData.append('responseType', replyData.responeType);
     if (replyData.image != null) {
       formData.append('image', replyData.image)
     }
-    let httpMultipart = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data; charset=UTF-8'
-      })
-    };
-   return this.http.post<void>('http://localhost:8080/api/comment/add', formData, httpMultipart);
+    return this.http.post('http://localhost:8080/api/comment/add', formData);
   }
 }

@@ -4,6 +4,7 @@ import {UserService} from "../user.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UiService} from "../ui.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(public userService: UserService,
               private toastr: ToastrService,
-              public uiService: UiService) {
+              public uiService: UiService,
+              public router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,7 +36,8 @@ export class LoginComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         this.toastr.error(err.status == 401 ? 'Wrong email or password' : 'Something went wrong, try again later')
-      }
+      },
+      complete: () => this.router.navigateByUrl('/')
     });
   }
 

@@ -25,21 +25,26 @@
                  class="form-control rounded-pill ">
 
         </form>
-        <ul *ngIf="this.userService.isLoggedOut()"
-            class="d-none d-sm-inline-block navbar-nav fl-row justify-content-end">
-          <li class="nav-item d-inline-block poi" (click)="switch()">
-            <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']"
-                     class="fa-2xl mx-1 pointer"></fa-icon>
+        <ul
+          class="d-none d-sm-inline-block navbar-nav fl-row justify-content-end">
+          <li class="nav-item d-inline-block p-2" (click)="switch()" (mouseover)="hoverThemeButton = true" (mouseout)="hoverThemeButton = false" [ngClass]="hoverThemeButton ? 'border border-1 border-secondary' : ''">
+            <button class="border-0 bg-transparent">
+              <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']"
+                       [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+                       class="fa-2xl mx-1 pointer"></fa-icon>
+            </button>
           </li>
-          <li class="nav-item d-inline-block">
+          <li class="nav-item d-inline-block" *ngIf="userService.isLoggedOut()">
             <a class="nav-link" routerLink="login">
               <button class="btn btn-secondary ">Log in</button>
             </a>
           </li>
-          <li class="nav-item d-inline-block">
+          <li class="nav-item d-inline-block" *ngIf="userService.isLoggedOut()">
             <a class="nav-link" routerLink="registration">
               <button class="btn btn-primary ">Sign up</button>
             </a>
+          </li>
+          <li class="nav-item d-inline-block" *ngIf="userService.isLoggedIn()">
           </li>
         </ul>
         <button class="navbar-toggler text-dark d-block d-sm-none" type="button" (click)="ExpandEv()">
@@ -49,6 +54,8 @@
                    class="h1"></fa-icon>
         </span>
         </button>
+        <app-profile-widget *ngIf="userService.isLoggedIn()">
+        </app-profile-widget>
       </div>
     </div>
   </nav>
@@ -57,16 +64,20 @@
        class="sticky-top d-flex d-sm-none border-bottom shadow-sm">
     <div class="list-group col-12 bg-dark">
       <div class="btn-group-vertical" role="group" aria-label="Basic example">
-        <a [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
-           class="btn"
-           href="/login"
-           type="button">
+        <a
+          *ngIf="userService.isLoggedOut()"
+          [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
+          class="btn"
+          href="/login"
+          type="button">
           Log in
         </a>
-        <a [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
-           class="btn"
-           href="/registration"
-           type="button">
+        <a
+          *ngIf="userService.isLoggedOut()"
+          [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
+          class="btn"
+          href="/registration"
+          type="button">
           Sign up
         </a>
 

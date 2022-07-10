@@ -15,10 +15,19 @@
 .bg-lightgray {
   background-color: #dae0e6;
 }
+
+.bg-darkless {
+  background-color: #2d3034;
+}
 .tox-notifications-container {
   display: none !important;
 }
 
 .tox-statusbar__branding {
   display: none !important;
+}
+
+.pfp-icon {
+  max-width: 32px;
+  height: auto;
 }

@@ -1,11 +1,13 @@
 <form
+  enctype="multipart/form-data"
   class="my-3 rounded-3"
   (submit)="postReply()">
-  <editor
-    (onSaveContent)="postReply()"
-    [(ngModel)]="replyData.content"
-    name="post-reply"
-    [init]="{
+  <div class="d-flex row flex-row justify-content-around row">
+    <img class="img col-12 col-sm-3 m-2" alt="image preview" *ngIf="replyData.image != null" [src]="previewImageUrl">
+    <editor
+      [(ngModel)]="replyData.content"
+      name="post-reply"
+      [init]="{
      height: 300,
      menubar: false,
      content_css: uiService.isLightMode() ? 'bootstrap' : 'dark',
@@ -13,15 +15,20 @@
      plugins:
        'advlist autolink lists link image charmap anchor save visualblocks media table paste code',
      toolbar:
-       'undo redo | bold italic strikethrough superscript subscript | h1 h2 | bullist numlist link | styleselect fontselect fonsizeselect formatselect | hr blockquote | alignleft aligncenter alignright alignjustify | outdent indent | removeformat save '
+       'undo redo | bold italic strikethrough superscript subscript | h1 h2 | bullist numlist link | styleselect fontselect fonsizeselect formatselect | hr blockquote | alignleft aligncenter alignright alignjustify | outdent indent | removeformat '
    }"
-    class="col-12"
-  >
-  </editor>
+      class="d-inline-block col-12"
+      [ngClass]="replyData.image != null ? 'col-sm-8' : ''"
+    >
+    </editor>
+  </div>
   <div class="col-12 m-2 d-flex justify-content-between">
-    <label for="file" class="btn btn-primary">Choose an image (optional)</label>
-    <input name="file" type="file" id="file" (change)="onFileSelected($event)" class="file-input d-inline-block visually-hidden" accept=".png, .jpg, .jpeg, .gif, .webp"/>
-    <button type="submit" class="btn btn-primary d-inline-block">
+    <label [for]="imageInputId" class="btn btn-primary"
+           [innerText]="replyData.image == null ? 'Choose an image (optional)' : replyData.image.name"></label>
+    <input name="file" type="file" [id]="imageInputId" (change)="onFileSelected($event)"
+           class="file-input d-inline-block visually-hidden" accept=".png, .jpg, .jpeg, .webp"/>
+    <button type="submit"
+            class="btn btn-primary d-inline-block">
       Comment
     </button>
   </div>

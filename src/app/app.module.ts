@@ -24,6 +24,8 @@ import { CommentComponent } from './comment/comment.component';
 import {CommonModule} from "@angular/common";
 import {EditorModule} from "@tinymce/tinymce-angular";
 import { ReplyComponent } from './reply/reply.component';
+import { LoadingComponent } from './loading/loading.component';
+import { ProfileWidgetComponent } from './profile-widget/profile-widget.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ReplyComponent } from './reply/reply.component';
     FullPostComponent,
     CommentComponent,
     ReplyComponent,
+    LoadingComponent,
+    ProfileWidgetComponent,
   ],
     imports: [
         CommonModule,

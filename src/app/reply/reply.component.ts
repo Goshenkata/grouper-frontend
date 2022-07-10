@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UiService} from "../ui.service";
 import {UserService} from "../user.service";
 import {ReplyTo} from "./ReplyTo";
@@ -7,6 +7,7 @@ import {getTinymce} from "@tinymce/tinymce-angular/TinyMCE";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommentService} from "../comment.service";
 import {ToastrService} from "ngx-toastr";
+import {LoadingService} from "../loading.service";
 
 @Component({
   selector: 'app-reply',
@@ -19,11 +20,14 @@ export class ReplyComponent implements OnInit {
   @Input()
   public id!: number;
   public replyData!: Reply;
+  public previewImageUrl: string | ArrayBuffer | null = null;
+  imageInputId: string = Math.random().toString(36);
 
-  constructor(public uiService: UiService,
+  public constructor(public uiService: UiService,
               public userService: UserService,
               public commentService: CommentService,
-              public toastr: ToastrService) {
+              public toastr: ToastrService,
+              public loadingService: LoadingService) {
   }
 
   ngOnInit(): void {
@@ -31,18 +35,27 @@ export class ReplyComponent implements OnInit {
   }
 
   postReply() {
+    this.loadingService.isLoading = true;
     this.commentService.postComment(this.replyData)
       .subscribe({
-       error: err => (err.error == 400 ? this.toastr.error('comment cannot be blank') : this.toastr.error('Something went wrong')),
-        complete: () => this.toastr.success('comment sent')
+        next: () => this.toastr.success('comment sent'),
+        error: err => (err.status == 400 ? this.toastr.error('comment cannot be blank') : this.toastr.error('Something went wrong')),
+        complete: () => {
+          this.loadingService.isLoading = false;
+          location.reload()
+        }
       });
   }
 
   onFileSelected($event: Event) {
     const element = $event.target as HTMLInputElement;
     let files = element.files;
-    if (files != null) {
-      this.replyData.image = files.item(0)
+    let file = files!.item(0);
+    if (file != null) {
+      this.replyData.image = file;
+      const reader = new FileReader();
+      reader.onload = e => this.previewImageUrl = reader.result;
+      reader.readAsDataURL(file);
     }
   }
 }

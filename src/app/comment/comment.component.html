@@ -1,21 +1,36 @@
-<section class="m-0 ps-3 py-1 border-start rounded-start" [ngClass]="uiService.isLightMode() ? 'border-light' : 'border-dark'">
+<section class="m-0 ps-3 py-1 border-start rounded-start"
+         [ngClass]="uiService.isLightMode() ? 'border-light' : 'border-dark'">
   <div class="card row"
        [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
   >
     <div class="row g-0">
-      <div *ngIf="comment.image != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'" (click)="fullScreen=!fullScreen">
+      <div *ngIf="comment.image != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'"
+           (click)="fullScreen=!fullScreen">
         <img src="{{comment.image?.url}}" class="img-fluid rounded-start" alt="image of post">
       </div>
-      <div [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
+      <div class="d-flex flex-column justify-content-between" [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
         <div class="card-body">
-          <div class="d-inline-block d-sm-flex justify-content-between">
-            <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+          <div>
+            <div class="d-inline-block d-sm-flex justify-content-between">
+              <small class="text-muted">
+                <img class="rounded-circle img pfp-icon me-2"
+                     [src]="comment.author.pfp == null ? 'assets/images/default-pfp.jpg' : comment.author.pfp"
+                     alt="user pfp"/> <a class="link-light"
+                                         [href]="'/user/' + comment.author.username">{{comment.author.username}}</a></small>
+              <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+            </div>
+            <p class="card-text pt-2 pt-sm-0" [innerHtml]="comment.contents"></p>
           </div>
-          <p class="card-text pt-2 pt-sm-0">{{comment.contents}}</p>
+        </div>
+        <div>
+          <button class="btn fw-bold" (mouseover)="hovered = true" (mouseout)="hovered = false" [ngClass]="uiService.isLightMode() ? hovered ? 'bg-light text-dark' : 'bg-white text-dark': hovered ? 'bg-darkless text-light' :'bg-dark text-light'" (click)="replyExpand = !replyExpand">
+            <fa-icon [icon]="['fas','reply']"></fa-icon> Reply
+          </button>
         </div>
       </div>
     </div>
   </div>
+  <app-reply *ngIf="replyExpand" [id]="comment.id" [replyTo]="ReplyTo.COMMENT"></app-reply>
   <div *ngFor="let reply of comment.replies" class="ms-3">
     <app-comment [comment]="reply"></app-comment>
   </div>

@@ -1,3 +1,3 @@
 export enum ReplyTo {
-  POST, COMMENT
+  POST = "POST", COMMENT = "COMMENT"
 }
