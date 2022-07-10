@@ -5,8 +5,8 @@ import {TermsComponent} from "./terms/terms.component";
 import {LoginComponent} from "./login/login.component";
 import {AboutComponent} from "./about/about.component";
 import {FeedComponent} from "./feed/feed.component";
-import {PostComponent} from "./post/post.component";
 import {FullPostComponent} from "./full-post/full-post.component";
+import {SubmitPostComponent} from "./submit-post/submit-post.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -14,7 +14,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'about', component: AboutComponent},
   {path: '', component: FeedComponent},
-  {path: 'post/:postId', component: FullPostComponent}
+  {path: 'post/:postId', component: FullPostComponent},
+  {path: 'submit', component: SubmitPostComponent}
 ];
 
 @NgModule({

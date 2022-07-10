@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class NavbarComponent implements OnInit {
   public expand: boolean;
   public hoverThemeButton: boolean = false;
+  public hoverSubmitButton: boolean = false;
 
 
   constructor(public userService: UserService,

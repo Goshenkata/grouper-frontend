@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginForm} from "./login/LoginForm";
 import {LoginResponse} from "./login/LoginResponse";
+import {ProfileWidgetDto} from "./profile-widget/profile-widget-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,9 @@ export class UserService {
       .subscribe({next: v => {end = v}})
     console.log(end)
     return end;
+  }
+
+  getProfileWidget(): Observable<ProfileWidgetDto> {
+    return this.http.get<ProfileWidgetDto>('http://localhost:8080/api/user/profile-widget', this.httpOptions);
   }
 }

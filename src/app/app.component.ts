@@ -5,7 +5,7 @@ import {
   faEnvelope,
   faKey,
   faLock,
-  faMoon, faReply,
+  faMoon, faPen, faReply,
   faSearch,
   faSun,
   faUser
@@ -36,7 +36,8 @@ export class AppComponent {
       faAngular,
       faBars,
       faClose,
-      faReply
+      faReply,
+      faPen
     );
   }
 }

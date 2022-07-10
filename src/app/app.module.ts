@@ -26,6 +26,7 @@ import {EditorModule} from "@tinymce/tinymce-angular";
 import { ReplyComponent } from './reply/reply.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ProfileWidgetComponent } from './profile-widget/profile-widget.component';
+import { SubmitPostComponent } from './submit-post/submit-post.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProfileWidgetComponent } from './profile-widget/profile-widget.componen
     ReplyComponent,
     LoadingComponent,
     ProfileWidgetComponent,
+    SubmitPostComponent,
   ],
     imports: [
         CommonModule,
