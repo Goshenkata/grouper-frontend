@@ -8,23 +8,30 @@
            (click)="fullScreen=!fullScreen">
         <img src="{{comment.image?.url}}" class="img-fluid rounded-start" alt="image of post">
       </div>
-      <div class="d-flex flex-column justify-content-between" [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
+      <div class="d-flex flex-column justify-content-between"
+           [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
         <div class="card-body">
           <div>
             <div class="d-inline-block d-sm-flex justify-content-between">
               <small class="text-muted">
                 <img class="rounded-circle img pfp-icon me-2"
                      [src]="comment.author.pfp == null ? 'assets/images/default-pfp.jpg' : comment.author.pfp"
-                     alt="user pfp"/> <a class="link-light"
-                                         [href]="'/user/' + comment.author.username">{{comment.author.username}}</a></small>
+                     alt="user pfp"/>
+                <a class="link-light"
+                   [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+                   [href]="'/user/' + comment.author.username">{{comment.author.username}}</a>
+              </small>
               <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
             </div>
             <p class="card-text pt-2 pt-sm-0" [innerHtml]="comment.contents"></p>
           </div>
         </div>
         <div>
-          <button class="btn fw-bold" (mouseover)="hovered = true" (mouseout)="hovered = false" [ngClass]="uiService.isLightMode() ? hovered ? 'bg-light text-dark' : 'bg-white text-dark': hovered ? 'bg-darkless text-light' :'bg-dark text-light'" (click)="replyExpand = !replyExpand">
-            <fa-icon [icon]="['fas','reply']"></fa-icon> Reply
+          <button class="btn fw-bold" (mouseover)="hovered = true" (mouseout)="hovered = false"
+                  [ngClass]="uiService.isLightMode() ? hovered ? 'bg-light text-dark' : 'bg-white text-dark': hovered ? 'bg-darkless text-light' :'bg-dark text-light'"
+                  (click)="replyExpand = !replyExpand">
+            <fa-icon [icon]="['fas','reply']"></fa-icon>
+            Reply
           </button>
         </div>
       </div>

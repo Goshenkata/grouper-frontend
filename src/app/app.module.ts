@@ -27,6 +27,7 @@ import { ReplyComponent } from './reply/reply.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ProfileWidgetComponent } from './profile-widget/profile-widget.component';
 import { SubmitPostComponent } from './submit-post/submit-post.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SubmitPostComponent } from './submit-post/submit-post.component';
     LoadingComponent,
     ProfileWidgetComponent,
     SubmitPostComponent,
+    SearchComponent,
   ],
     imports: [
         CommonModule,

@@ -13,18 +13,14 @@
       </span>
       </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-inline-flex m-auto col-6 col-sm-4">
-          <label class="d-none d-sm-inline-block" for="search">
-            <fa-icon [icon]="['fas', 'search']" class="fa-2x mx-2 my-auto mx-1 d-inline-block"></fa-icon>
-          </label>
-          <input id="search"
-                 [ngClass]="uiService.isLightMode() ? 'bg-light' : ['bg-secondary', 'border-dark', 'light-class']"
-                 [style]="uiService.isLightMode() ? 'color:var(--bs-dark);' : 'color:var(--bs-light);'"
-                 type="Search"
-                 placeholder="Search" aria-label="Search"
-                 class="form-control rounded-pill ">
-
-        </form>
+        <div class="d-inline-flex m-auto col-12 col-sm-4">
+          <div class="col-12">
+            <app-search></app-search>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-success" type="button">Search</button>
+          </div>
+        </div>
         <ul
           class="d-none d-sm-inline-block navbar-nav fl-row justify-content-end">
           <li class="nav-item d-inline-block p-2"
@@ -53,7 +49,7 @@
         <a class="btn mx-1 bg-transparent border-secondary" href="submit"
            (mouseover)="hoverSubmitButton = true" (mouseout)="hoverSubmitButton = false"
            [ngClass]="[hoverSubmitButton ? 'border-1' : 'border-0', uiService.isLightMode() ? 'text-dark' : 'text-light']"
-        *ngIf="userService.isLoggedIn()">
+           *ngIf="userService.isLoggedIn()">
           <fa-icon [icon]="['fas', 'pen']" class="h5 me-sm-2"></fa-icon>
           <small class="h5 d-sm-inline-block d-none">Submit</small>
         </a>

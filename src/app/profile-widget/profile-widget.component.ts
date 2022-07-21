@@ -21,7 +21,6 @@ export class ProfileWidgetComponent implements OnInit {
     userService.getProfileWidget()
       .subscribe({
         next: value => this.profileWidgetDTO = value,
-        error: err => this.toastr.error('Error ' + err.status)
       });
   }
 

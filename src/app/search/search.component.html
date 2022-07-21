@@ -1,0 +1,27 @@
+<form action="">
+  <div class="d-flex flex-row justify-content-center mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-light dropdown-toggle"
+              type="button"
+              (click)="expand = !expand"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        <small>
+          {{searchType | titlecase}}
+        </small>
+      </button>
+      <div class="dropdown-menu "
+           [ngClass]="expand ? 'show' : ''">
+        <a class="dropdown-item" (click)="searchType=searchTypeEnum.GROUP; expand=false;">Group</a>
+        <a class="dropdown-item" (click)="searchType=searchTypeEnum.USER; expand=false;">User</a>
+      </div>
+    </div>
+    <div class="col-12">
+      <input type="text" class="form-control col-12" aria-label="Search input with dropdown button">
+      <div class="dropdown-menu show">
+        <a class="dropdown-item">Group</a>
+      </div>
+    </div>
+  </div>
+</form>
