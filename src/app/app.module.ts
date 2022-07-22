@@ -28,6 +28,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { ProfileWidgetComponent } from './profile-widget/profile-widget.component';
 import { SubmitPostComponent } from './submit-post/submit-post.component';
 import { SearchComponent } from './search/search.component';
+import { GroupComponent } from './group/group.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { SearchComponent } from './search/search.component';
     ProfileWidgetComponent,
     SubmitPostComponent,
     SearchComponent,
+    GroupComponent,
+    UserComponent,
   ],
     imports: [
         CommonModule,

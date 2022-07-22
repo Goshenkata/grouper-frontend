@@ -13,16 +13,14 @@
       </span>
       </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="d-inline-flex m-auto col-12 col-sm-4">
-          <div class="col-12">
-            <app-search></app-search>
-          </div>
-          <div class="input-group-append">
-            <button class="btn btn-success" type="button">Search</button>
-          </div>
+        <div class="d-inline-flex m-auto align-middle">
+          <app-search></app-search>
+          <!--          <div class="input-group-append">-->
+          <!--            <button class="btn btn-success" type="button">Search</button>-->
+          <!--          </div>-->
         </div>
         <ul
-          class="d-none d-sm-inline-block navbar-nav fl-row justify-content-end">
+          class="d-none d-md-inline-block navbar-nav fl-row justify-content-end">
           <li class="nav-item d-inline-block p-2"
               *ngIf="userService.isLoggedOut()"
               (click)="switch()"
@@ -55,7 +53,7 @@
         </a>
         <button
           *ngIf="userService.isLoggedOut()"
-          class="navbar-toggler text-dark d-block d-sm-none" type="button" (click)="ExpandEv()">
+          class="navbar-toggler text-dark d-block d-md-none" type="button" (click)="ExpandEv()">
               <span>
                 <fa-icon [icon]="expand ? ['fas', 'close'] : ['fas', 'bars']"
                          [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'" class="h1">

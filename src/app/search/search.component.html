@@ -1,27 +1,51 @@
-<form action="">
-  <div class="d-flex flex-row justify-content-center mb-3">
-    <div class="input-group-prepend">
-      <button class="btn btn-light dropdown-toggle"
-              type="button"
-              (click)="expand = !expand"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false">
-        <small>
-          {{searchType | titlecase}}
-        </small>
-      </button>
-      <div class="dropdown-menu "
-           [ngClass]="expand ? 'show' : ''">
-        <a class="dropdown-item" (click)="searchType=searchTypeEnum.GROUP; expand=false;">Group</a>
-        <a class="dropdown-item" (click)="searchType=searchTypeEnum.USER; expand=false;">User</a>
-      </div>
+<!--<form>-->
+<div class="d-flex flex-row justify-content-center mb-3 col-6 col-md-12">
+  <div class="input-group-prepend">
+    <button class="btn dropdown-toggle"
+            [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
+            type="button"
+            (click)="expand = !expand"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+      <small>
+        {{searchType | titlecase}}
+      </small>
+    </button>
+    <div class="dropdown-menu "
+         [ngClass]="expand ? 'show' : ''">
+      <a class="dropdown-item" (click)="searchType=searchTypeEnum.GROUP; expand=false;">Group</a>
+      <a class="dropdown-item" (click)="searchType=searchTypeEnum.USER; expand=false;">User</a>
     </div>
-    <div class="col-12">
-      <input type="text" class="form-control col-12" aria-label="Search input with dropdown button">
-      <div class="dropdown-menu show">
-        <a class="dropdown-item">Group</a>
+  </div>
+  <div class="col-12"
+       (mouseover)="showDropdown=true;"
+       (mouseleave)="showDropdown=false; result = null;"
+  >
+    <input type="text"
+           name="query"
+           [ngClass]="uiService.isLightMode() ? 'bg-light' : ['bg-secondary', 'light-class']"
+           [style]="uiService.isLightMode() ? 'color:var(--bs-dark);' : 'color:var(--bs-light);'"
+           [(ngModel)]="query"
+           (ngModelChange)="queryFetch()"
+           class="form-control col-12"
+           aria-label="Search input with dropdown button">
+    <div class="dropdown-menu show"
+         [ngClass]="uiService.isLightMode() ? 'bg-light' : 'bg-dark'"
+         *ngIf="showDropdown && query.length > 0">
+      <div *ngFor="let res of result" class="mb-1">
+        <a class="dropdown-item pointer"
+           (click)="navigate(res)">
+          <img class=" rounded-circle img pfp-icon mx-1"
+               [src]="getImageSrc(res)"
+          />
+          <small class="text-decoration-none"
+                 [ngClass]="uiService.isLightMode() ? 'link-dark' : 'link-light'">
+            {{res.name}}
+          </small>
+        </a>
       </div>
     </div>
   </div>
-</form>
+</div>
+<!--</form>-->
