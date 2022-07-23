@@ -15,9 +15,9 @@
     </a>
     <app-search></app-search>
     <ul
+      *ngIf="userService.isLoggedOut()"
       class="d-none d-md-inline-block fl-row justify-content-end my-auto">
       <li class="nav-item d-inline-block m-1"
-          *ngIf="userService.isLoggedOut()"
           (click)="switch()"
           (mouseover)="hoverThemeButton = true"
           (mouseout)="hoverThemeButton = false"
@@ -28,24 +28,28 @@
                    class="fa-2xl mx-1 pointer"></fa-icon>
         </button>
       </li>
-      <li class="nav-item d-inline-block m-1" *ngIf="userService.isLoggedOut()">
+      <li class="nav-item d-inline-block m-1">
         <a class="nav-link" routerLink="login">
           <button class="btn btn-secondary ">Log in</button>
         </a>
       </li>
-      <li class="nav-item d-inline-block m-1" *ngIf="userService.isLoggedOut()">
+      <li class="nav-item d-inline-block m-1">
         <a class="nav-link" routerLink="registration">
           <button class="btn btn-primary ">Sign up</button>
         </a>
       </li>
     </ul>
-    <a class="btn mx-1 bg-transparent border-secondary" href="submit"
-       (mouseover)="hoverSubmitButton = true" (mouseout)="hoverSubmitButton = false"
-       [ngClass]="[hoverSubmitButton ? 'border-1' : 'border-0', uiService.isLightMode() ? 'text-dark' : 'text-light']"
-       *ngIf="userService.isLoggedIn()">
-      <fa-icon [icon]="['fas', 'pen']" class="h5 me-sm-2"></fa-icon>
-      <small class="h5 d-md-inline-block d-none">Submit</small>
-    </a>
+    <div class="d-flex"
+         *ngIf="userService.isLoggedIn()">
+      <a class="btn mx-1 bg-transparent border-secondary" href="submit"
+         (mouseover)="hoverSubmitButton = true" (mouseout)="hoverSubmitButton = false"
+         [ngClass]="[hoverSubmitButton ? 'border-1' : 'border-0', uiService.isLightMode() ? 'text-dark' : 'text-light']">
+        <fa-icon [icon]="['fas', 'pen']" class="h5 me-sm-2"></fa-icon>
+        <small class="h5 d-md-inline-block d-none">Submit</small>
+      </a>
+      <app-profile-widget>
+      </app-profile-widget>
+    </div>
     <button
       *ngIf="userService.isLoggedOut()"
       class="navbar-toggler text-dark d-block d-md-none" type="button" (click)="ExpandEv()">
@@ -55,8 +59,6 @@
                 </fa-icon>
               </span>
     </button>
-    <app-profile-widget *ngIf="userService.isLoggedIn()">
-    </app-profile-widget>
   </nav>
   <div *ngIf="expand && userService.isLoggedOut()"
        [ngClass]="uiService.isLightMode() ? 'bg-light text-dark' : 'bg-dark text-light'"
