@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SubmitForm} from "./submit-form";
 
 @Component({
   selector: 'app-submit-post',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submit-post.component.css']
 })
 export class SubmitPostComponent implements OnInit {
+
+  model : SubmitForm = new SubmitForm('',null,'','')
 
   constructor() { }
 

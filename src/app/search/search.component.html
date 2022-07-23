@@ -1,6 +1,6 @@
 <!--<form>-->
-<div class="d-flex flex-row justify-content-center mb-3 col-6 col-md-12">
-  <div class="input-group-prepend">
+<div class="d-flex mx-1">
+  <div class="input-group-prepend d-inline-block w-auto">
     <button class="btn dropdown-toggle"
             [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
             type="button"
@@ -8,17 +8,20 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
-      <small>
+      <small class="d-none d-md-inline-block">
         {{searchType | titlecase}}
       </small>
+      <small class="d-inline-block d-md-none fw-bold">
+        {{searchType | slice:0:1}}
+      </small>
     </button>
-    <div class="dropdown-menu "
+    <div class="dropdown-menu"
          [ngClass]="expand ? 'show' : ''">
       <a class="dropdown-item" (click)="searchType=searchTypeEnum.GROUP; expand=false;">Group</a>
       <a class="dropdown-item" (click)="searchType=searchTypeEnum.USER; expand=false;">User</a>
     </div>
   </div>
-  <div class="col-12"
+  <div class="col-10"
        (mouseover)="showDropdown=true;"
        (mouseleave)="showDropdown=false; result = null;"
   >
@@ -47,5 +50,5 @@
       </div>
     </div>
   </div>
+  <!--</form>-->
 </div>
-<!--</form>-->
