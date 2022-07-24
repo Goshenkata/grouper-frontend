@@ -3,6 +3,7 @@
   <div class="input-group-prepend d-inline-block w-auto">
     <button class="btn dropdown-toggle"
             [ngClass]="uiService.isLightMode() ? 'btn-light' : 'btn-dark'"
+            [disabled]="isLockedUser"
             type="button"
             (click)="expand = !expand"
             data-toggle="dropdown"
@@ -26,7 +27,6 @@
        (mouseleave)="showDropdown=false; result = null;"
   >
     <input type="text"
-           name="query"
            [ngClass]="uiService.isLightMode() ? 'bg-light' : ['bg-secondary', 'light-class']"
            [style]="uiService.isLightMode() ? 'color:var(--bs-dark);' : 'color:var(--bs-light);'"
            [(ngModel)]="query"
@@ -38,7 +38,7 @@
          *ngIf="showDropdown && query.length > 0">
       <div *ngFor="let res of result" class="mb-1">
         <a class="dropdown-item pointer"
-           (click)="navigate(res)">
+           (click)="select(res)">
           <img class=" rounded-circle img pfp-icon mx-1"
                [src]="getImageSrc(res)"
           />

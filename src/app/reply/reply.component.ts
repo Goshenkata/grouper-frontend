@@ -19,6 +19,8 @@ export class ReplyComponent implements OnInit {
   public replyTo!: ReplyTo
   @Input()
   public id!: number;
+  @Input()
+  public isSubmit: boolean = false;
   public replyData!: Reply;
   public previewImageUrl: string | ArrayBuffer | null = null;
   imageInputId: string = Math.random().toString(36);

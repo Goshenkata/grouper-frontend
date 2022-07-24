@@ -39,7 +39,7 @@ export class FullPostComponent implements OnInit {
       commentCount: this.fullPost.commentCount,
       content: this.fullPost.content,
       created: this.fullPost.created,
-      groupName: this.fullPost.groupName,
+      group: this.fullPost.group,
       id: this.fullPost.id,
       image: this.fullPost.image,
       postAuthor: this.fullPost.postAuthor,

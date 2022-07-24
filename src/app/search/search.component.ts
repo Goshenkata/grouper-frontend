@@ -15,6 +15,8 @@ export class SearchComponent implements OnInit {
   public expand: boolean = false;
   @Input()
   public searchType: SearchType = SearchType.USER;
+  @Input()
+  public isLockedUser: boolean = false;
   searchTypeEnum = SearchType;
   query: string = '';
   showDropdown: boolean = false;
@@ -22,7 +24,8 @@ export class SearchComponent implements OnInit {
 
   constructor(public uiService: UiService,
               public searchService: SearchService,
-              public router: Router) { }
+              public router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -36,20 +39,24 @@ export class SearchComponent implements OnInit {
       })
   }
 
-  getImageSrc(res: SearchDto):string {
-      if (res.imageUrl == null) {
-        switch (this.searchType) {
-          case SearchType.GROUP:
-            return '/assets/images/default-group.png'
-          case SearchType.USER:
-            return '/assets/images/default-pfp.jpg'
+  getImageSrc(res: SearchDto): string {
+    if (res.imageUrl == null) {
+      switch (this.searchType) {
+        case SearchType.GROUP:
+          return '/assets/images/default-group.png'
+        case SearchType.USER:
+          return '/assets/images/default-pfp.jpg'
 
-        }
       }
-      return res.imageUrl;
+    }
+    return res.imageUrl;
   }
 
-  navigate(res: SearchDto) {
-    this.router.navigateByUrl( this.searchType.toString().toLowerCase() + '/' + res.name)
+  select(res: SearchDto) {
+    if (!this.isLockedUser) {
+      this.router.navigateByUrl(this.searchType.toString().toLowerCase() + '/' + res.name)
+    }
+    this.query = res.name;
+    this.showDropdown = false;
   }
 }

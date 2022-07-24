@@ -19,6 +19,7 @@ export class CommentService {
     if (replyData.image != null) {
       formData.append('image', replyData.image)
     }
+    console.log(replyData)
     return this.http.post('http://localhost:8080/api/comment/add', formData);
   }
 }

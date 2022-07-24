@@ -28,6 +28,7 @@
     <input name="file" type="file" [id]="imageInputId" (change)="onFileSelected($event)"
            class="file-input d-inline-block visually-hidden" accept=".png, .jpg, .jpeg, .webp"/>
     <button type="submit"
+            *ngIf="!isSubmit"
             class="btn btn-primary d-inline-block">
       Comment
     </button>

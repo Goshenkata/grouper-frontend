@@ -8,10 +8,26 @@
     <div [ngClass]="post.postType=='IMAGE' ? 'col-md-8' : 'col-md-12'">
       <div class="card-body">
         <div class="d-inline-block d-sm-flex justify-content-between">
-          <h4 class="card-title">{{post.title}}</h4>
+          <small class="text-muted">
+            <span>
+            <img class="rounded-circle img pfp-icon me-2"
+                 [src]="post.group.iconUrl == null ? 'assets/images/default-group.png' : post.group.iconUrl"
+                 alt="group icon"/>
+            <a class="link-light"
+               [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+               [href]="'/group/' + post.group.name">{{post.group.name}}</a>
+            </span>
+            <div class="vr mx-1"></div>
+            <span>Posted by </span>
+            <span>
+            <a class="link-light"
+               [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+               [href]="'/user/' + post.postAuthor.username">{{post.postAuthor.username}}</a>
+            </span>
+          </small>
           <small class="text-muted">Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
         </div>
-        <p class="card-text pt-2 pt-sm-0">{{post.content}}</p>
+        <p class="card-text pt-2 pt-sm-0" [innerHTML]="post.content"></p>
         <p class="card-text d-inline-block">
           <small class="text-muted">{{post.commentCount}} comments</small></p>
         <p class="card-text"></p>

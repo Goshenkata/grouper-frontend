@@ -39,7 +39,7 @@ export class UiService {
       localStorage.setItem("theme", "dark");
     }
     //tinymc cannot change theme dynamically so it must be reloaded
-    if(/^(\/post\/\d)$/.test(location.pathname)) {
+    if(/^(\/post\/\d)$/.test(location.pathname) || /^(\/submit)$/.test(location.pathname)) {
       location.reload();
     }
   }

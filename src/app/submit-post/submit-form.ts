@@ -1,9 +1,9 @@
 export class SubmitForm {
   constructor(
-    title: string,
-    image: File | null,
-    content: string,
-    groupName: string
+    public title: string,
+    public image: File | null,
+    public content: string,
+    public groupName: string
   ) {
   }
 }
