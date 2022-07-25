@@ -3,6 +3,8 @@ import {FeedService} from "../feed.service";
 import {Post} from "../post/post";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {SortType} from "./sort-type";
+import {UiService} from "../ui.service";
 
 @Component({
   selector: 'app-feed',
@@ -15,17 +17,14 @@ export class FeedComponent implements OnInit {
   page: number
   size: number
 
-  constructor(private feedService: FeedService,
+  constructor(public feedService: FeedService,
               private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              public uiService: UiService) {
     this.page = 0;
     this.size = 10;
     this.feed = [];
-    this.feedService.getFeed(this.page, this.size)
-      .subscribe({
-        next: res => this.feed = res,
-        error: () => toastr.error("Something went wrong :(")
-      })
+    this.getFeed()
   }
 
   ngOnInit(): void {
@@ -33,14 +32,37 @@ export class FeedComponent implements OnInit {
 
   onScrollDown() {
     this.page++;
-    this.feedService.getFeed(this.page, this.size)
+  }
+
+  navToPost(id: number) {
+    this.router.navigate(['/post/' + id])
+  }
+
+  public setNew() {
+    this.feedService.sort = SortType.NEW
+    localStorage.setItem('sort', 'NEW')
+    this.refreshFeed()
+  }
+
+  public setRising() {
+    this.feedService.sort = SortType.RISING
+    localStorage.setItem('sort', 'RISING')
+    this.refreshFeed()
+  }
+
+  private getFeed() {
+    return this.feedService.getFeed(this.page, this.size, this.feedService.sort)
       .subscribe({
         next: res => this.feed = this.feed.concat(res),
         error: () => this.toastr.error("Something went wrong :("),
       })
   }
 
-  navToPost(id: number) {
-    this.router.navigate(['/post/' + id])
+  private refreshFeed() {
+    return this.feedService.getFeed(this.page, this.size, this.feedService.sort)
+      .subscribe({
+        next: res => this.feed = res,
+        error: () => this.toastr.error("Something went wrong :("),
+      })
   }
 }

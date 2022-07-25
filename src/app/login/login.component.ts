@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
               private toastr: ToastrService,
               public uiService: UiService,
               public router: Router) {
+    if (userService.isLoggedIn()) {
+      this.router.navigateByUrl('');
+    }
   }
 
   ngOnInit(): void {
@@ -30,8 +33,8 @@ export class LoginComponent implements OnInit {
         console.log(res)
         localStorage.setItem('access_token', res.access_token)
         localStorage.setItem('refresh_token', res.refresh_token)
+        localStorage.setItem('username', res.username)
         localStorage.setItem('expires_at', res.expires_at.toString())
-        localStorage.setItem('expires_at', res.username)
       },
       error: (err: HttpErrorResponse) => {
         this.toastr.error(err.status == 401 ? 'Wrong email or password' : 'Something went wrong, try again later')

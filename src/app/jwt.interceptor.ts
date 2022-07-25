@@ -56,6 +56,7 @@ export class JwtInterceptor implements HttpInterceptor {
               localStorage.setItem('refresh_token', res.refresh_token)
               localStorage.setItem('access_token', res.access_token)
               localStorage.setItem('expires_at', res.expires_at.toString())
+              localStorage.setItem('username', res.username)
               console.log('token refreshed')
               return next.handle(this.addTokenHeader(request, res.access_token));
             },

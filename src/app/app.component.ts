@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {
+  faArrowTrendUp,
   faBars,
   faClose,
   faEnvelope,
@@ -37,7 +38,8 @@ export class AppComponent {
       faBars,
       faClose,
       faReply,
-      faPen
+      faPen,
+      faArrowTrendUp
     );
   }
 }

@@ -2,7 +2,7 @@
   <app-post [post]="getPost()"></app-post>
   <hr>
   <div class="ms-3 me-4">
-    <app-reply [id]="fullPost.id" [replyTo]="ReplyTo.POST"></app-reply>
+    <app-reply *ngIf="userService.isLoggedIn()" [id]="fullPost.id" [replyTo]="ReplyTo.POST"></app-reply>
     <div *ngFor="let comment of fullPost.comments">
       <app-comment [comment]="comment"></app-comment>
       <hr>

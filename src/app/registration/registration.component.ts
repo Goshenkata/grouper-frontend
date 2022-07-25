@@ -20,6 +20,9 @@ export class RegistrationComponent implements OnInit {
               private toastr: ToastrService,
               private router: Router,
               public uiService: UiService) {
+    if (userService.isLoggedIn()) {
+      this.router.navigateByUrl('')
+    }
   }
 
   ngOnInit(): void {

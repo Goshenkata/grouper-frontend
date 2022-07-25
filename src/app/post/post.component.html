@@ -27,6 +27,7 @@
           </small>
           <small class="text-muted">Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
         </div>
+        <h4 class="my-2">{{post.title}}</h4>
         <p class="card-text pt-2 pt-sm-0" [innerHTML]="post.content"></p>
         <p class="card-text d-inline-block">
           <small class="text-muted">{{post.commentCount}} comments</small></p>
