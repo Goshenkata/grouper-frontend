@@ -18,8 +18,8 @@
     </button>
     <div class="dropdown-menu"
          [ngClass]="expand ? 'show' : ''">
-      <a class="dropdown-item" (click)="searchType=searchTypeEnum.GROUP; expand=false;">Group</a>
-      <a class="dropdown-item" (click)="searchType=searchTypeEnum.USER; expand=false;">User</a>
+      <a class="dropdown-item" (click)="selectGroup()">Group</a>
+      <a class="dropdown-item" (click)="selectUser()">User</a>
     </div>
   </div>
   <div class="col-10"

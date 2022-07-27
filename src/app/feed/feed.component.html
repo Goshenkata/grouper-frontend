@@ -1,12 +1,15 @@
 <div class="d-flex justify-content-center mt-3">
-  <input type="checkbox" class="btn-check " id="new" [checked]="feedService.isRising()" (click)="setRising()" autocomplete="off">
+  <input type="checkbox" class="btn-check " id="new" [checked]="feedService.isRising()" (click)="setRising()"
+         autocomplete="off">
   <label class="btn mx-2 btn-outline-primary" for="new">
     <fa-icon icon="arrow-trend-up" class="me-1"></fa-icon>
     Rising
   </label>
-  <input type="checkbox" class="btn-check " id="rising" [checked]="feedService.isNew()" (click)="setNew()" autocomplete="off">
+  <input type="checkbox" class="btn-check " id="rising" [checked]="feedService.isNew()" (click)="setNew()"
+         autocomplete="off">
   <label class="btn mx-2 btn-outline-primary" for="rising">
-    <fa-icon icon="sun" class="me-1"></fa-icon> New
+    <fa-icon icon="sun" class="me-1"></fa-icon>
+    New
   </label>
 </div>
 <ul [(ngModel)]="feed"
@@ -19,7 +22,7 @@
 >
   <li *ngFor="let post of feed">
     <a class="pointer text-decoration-none " (click)="navToPost(post.id)">
-      <app-post [post]="post"></app-post>
+      <app-post [post]="post" [feedType]="feedType"></app-post>
     </a>
   </li>
 </ul>
@@ -28,4 +31,3 @@
     display: none !important;
   }
 </style>
-

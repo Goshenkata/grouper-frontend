@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center">
   <form class="col-12" (submit)="createPost()" #form="ngForm">
     <div class="mt-3 row mx-auto">
-      <div class="col-6 d-flex">
+      <div class="col-12 col-md-6 d-flex">
         <label class="col-form-label me-2" for="title">Title</label>
         <input class="d-inline-block form-control"
                id="title"
@@ -13,8 +13,8 @@
                required>
       </div>
 
-      <div class="col-6">
-        <app-search [isLockedUser]="true" [searchType]="searchType"></app-search>
+      <div class="col-12 col-md-6">
+        <app-search [isLockedUser]="true" ></app-search>
       </div>
     </div>
     <app-reply [isSubmit]="true"></app-reply>

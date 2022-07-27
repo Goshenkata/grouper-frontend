@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "./post";
 import {UiService} from "../ui.service";
+import {FeedType} from "../feed/feed-type";
 
 @Component({
   selector: 'app-post',
@@ -10,6 +11,8 @@ import {UiService} from "../ui.service";
 export class PostComponent implements OnInit {
   @Input()
   post!: Post;
+  @Input()
+  feedType: FeedType = FeedType.NONE
   uiService: UiService
   fullScreen: boolean;
 
@@ -21,5 +24,12 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isGroup(): boolean {
+    return this.feedType == FeedType.GROUP
+  }
+
+  isUser(): boolean {
+    return this.feedType == FeedType.USER
+  }
 
 }

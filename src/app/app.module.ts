@@ -30,6 +30,7 @@ import { SubmitPostComponent } from './submit-post/submit-post.component';
 import { SearchComponent } from './search/search.component';
 import { GroupComponent } from './group/group.component';
 import { UserComponent } from './user/user.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { UserComponent } from './user/user.component';
     SearchComponent,
     GroupComponent,
     UserComponent,
+    NotFoundComponent,
   ],
     imports: [
         CommonModule,

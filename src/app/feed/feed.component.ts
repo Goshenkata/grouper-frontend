@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FeedService} from "../feed.service";
 import {Post} from "../post/post";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {SortType} from "./sort-type";
 import {UiService} from "../ui.service";
+import {FeedType} from "./feed-type";
 
 @Component({
   selector: 'app-feed',
@@ -12,6 +13,11 @@ import {UiService} from "../ui.service";
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
+
+  @Input()
+  feedType: FeedType = FeedType.NONE
+  @Input()
+  name: string = ''
 
   feed: Post[]
   page: number
@@ -24,14 +30,15 @@ export class FeedComponent implements OnInit {
     this.page = 0;
     this.size = 10;
     this.feed = [];
-    this.getFeed()
   }
 
   ngOnInit(): void {
+    this.getFeed()
   }
 
   onScrollDown() {
     this.page++;
+    this.getFeed()
   }
 
   navToPost(id: number) {
@@ -51,7 +58,7 @@ export class FeedComponent implements OnInit {
   }
 
   private getFeed() {
-    return this.feedService.getFeed(this.page, this.size, this.feedService.sort)
+    return this.feedService.getFeed(this.page, this.size, this.feedService.sort, this.feedType , this.name)
       .subscribe({
         next: res => this.feed = this.feed.concat(res),
         error: () => this.toastr.error("Something went wrong :("),
@@ -59,7 +66,8 @@ export class FeedComponent implements OnInit {
   }
 
   private refreshFeed() {
-    return this.feedService.getFeed(this.page, this.size, this.feedService.sort)
+    this.page = 0
+    return this.feedService.getFeed(this.page, this.size, this.feedService.sort, this.feedType, this.name)
       .subscribe({
         next: res => this.feed = res,
         error: () => this.toastr.error("Something went wrong :("),

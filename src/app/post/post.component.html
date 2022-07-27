@@ -9,7 +9,7 @@
       <div class="card-body">
         <div class="d-inline-block d-sm-flex justify-content-between">
           <small class="text-muted">
-            <span>
+            <span *ngIf="!isGroup()">
             <img class="rounded-circle img pfp-icon me-2"
                  [src]="post.group.iconUrl == null ? 'assets/images/default-group.png' : post.group.iconUrl"
                  alt="group icon"/>
@@ -17,9 +17,9 @@
                [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
                [href]="'/group/' + post.group.name">{{post.group.name}}</a>
             </span>
-            <div class="vr mx-1"></div>
-            <span>Posted by </span>
-            <span>
+            <div class="vr mx-1" *ngIf="!(isGroup() || isUser())"></div>
+            <span *ngIf="!isUser()">Posted by </span>
+            <span *ngIf="!isUser()">
             <a class="link-light"
                [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
                [href]="'/user/' + post.postAuthor.username">{{post.postAuthor.username}}</a>

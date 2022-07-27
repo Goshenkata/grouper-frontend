@@ -2,9 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UiService} from "../ui.service";
 import {SearchType} from "./SearchType";
 import {SearchService} from "../search.service";
-import {query} from "@angular/animations";
 import {SearchDto} from "./search.dto";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -13,21 +12,25 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
   public expand: boolean = false;
-  @Input()
-  public searchType: SearchType = SearchType.USER;
+  public searchType: SearchType = this.searchService.searchType
   @Input()
   public isLockedUser: boolean = false;
-  searchTypeEnum = SearchType;
   query: string = '';
   showDropdown: boolean = false;
   result: SearchDto[] | null = null;
 
   constructor(public uiService: UiService,
               public searchService: SearchService,
-              public router: Router) {
+              public router: Router,
+              public activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    if (this.isLockedUser) {
+      this.searchType = SearchType.GROUP
+    } else {
+      this.searchType = this.searchService.searchType
+    }
   }
 
   queryFetch() {
@@ -54,9 +57,32 @@ export class SearchComponent implements OnInit {
 
   select(res: SearchDto) {
     if (!this.isLockedUser) {
-      this.router.navigateByUrl(this.searchType.toString().toLowerCase() + '/' + res.name)
+      this.redirectTo(this.searchType.toString().toLowerCase() + '/' + res.name)
     }
     this.query = res.name;
     this.showDropdown = false;
+  }
+
+  selectGroup() {
+    if (!this.isLockedUser) {
+      this.searchService.searchType = SearchType.GROUP
+      this.searchType = SearchType.GROUP
+      localStorage.setItem('searchType', 'GROUP')
+      this.expand = false;
+    }
+  }
+
+  selectUser() {
+    if (!this.isLockedUser) {
+      this.searchService.searchType = SearchType.USER
+      this.searchType = SearchType.USER
+      localStorage.setItem('searchType', 'USER')
+      this.expand = false;
+    }
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
   }
 }

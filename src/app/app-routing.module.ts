@@ -9,6 +9,7 @@ import {FullPostComponent} from "./full-post/full-post.component";
 import {SubmitPostComponent} from "./submit-post/submit-post.component";
 import {GroupComponent} from "./group/group.component";
 import {UserComponent} from "./user/user.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'post/:postId', component: FullPostComponent},
   {path: 'submit', component: SubmitPostComponent},
   {path: 'group/:group', component: GroupComponent},
-  {path: 'user/:user', component: UserComponent}
+  {path: 'user/:user', component: UserComponent},
+  {path: '**', pathMatch: 'full', component: NotFoundComponent}
 ];
 
 @NgModule({

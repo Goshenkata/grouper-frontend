@@ -5,6 +5,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginForm} from "./login/LoginForm";
 import {LoginResponse} from "./login/LoginResponse";
 import {ProfileWidgetDto} from "./profile-widget/profile-widget-dto";
+import {UserInfo} from "./user/user-info";
+import {FeedType} from "./feed/feed-type";
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +75,13 @@ export class UserService {
 
   getProfileWidget(): Observable<ProfileWidgetDto> {
     return this.http.get<ProfileWidgetDto>('http://localhost:8080/api/user/profile-widget', this.httpOptions);
+  }
+
+  getInfo(user: string): Observable<UserInfo> {
+    return this.http.get<UserInfo>('http://localhost:8080/api/user/' + user);
+  }
+
+  getFeedType(): FeedType {
+    return FeedType.USER
   }
 }

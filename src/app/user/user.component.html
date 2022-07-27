@@ -1,1 +1,17 @@
-<p>user works!</p>
+<div class="container">
+  <div class="card mx-4" [ngClass]="uiService.isLightMode() ? 'bg-light text-dark' : 'bg-dark text-light'">
+    <div class="row no-gutters mb-3">
+      <div class="col-sm-5 d-flex justify-content-center">
+        <img class="card-img w-25" [src]="userInfo!.imageUrl == null ? '/assets/images/default-pfp.jpg' : userInfo!.imageUrl" [alt]="userInfo!.name + ' logo'">
+      </div>
+      <div class="col-sm-7" >
+        <div class="card-body">
+          <h3 class="card-title fw-bold">{{userInfo!.name}}</h3>
+          <p class="card-text" [ngClass]="userInfo!.description == null ? 'text-muted' : ''" [innerText]="userInfo!.description ?? userInfo!.name + ' has no description'"></p>
+          <!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-feed [feedType]="userService.getFeedType()" [name]="userInfo!.name"></app-feed>
+</div>

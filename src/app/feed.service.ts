@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Post} from "./post/post";
 import {Observable} from "rxjs";
 import {SortType} from "./feed/sort-type";
+import {FeedType} from "./feed/feed-type";
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class FeedService {
     }
   }
 
-  getFeed(page: number, size: number, sort: SortType): Observable<Post[]> {
-    return this.http.get<Post[]>("http://localhost:8080/api/post/feed?page=" + page + "&size=" + size + "&sort=" + sort.toString());
+  getFeed(page: number, size: number, sort: SortType, feedType: FeedType, name: string): Observable<Post[]> {
+    return this.http.get<Post[]>("http://localhost:8080/api/feed?page=" + page + "&size=" + size + "&sort=" + sort.toString() + '&feedType=' + feedType.toString() + '&name=' + name);
   }
 
 

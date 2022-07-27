@@ -1,1 +1,17 @@
-<p>group works!</p>
+<div class="container">
+  <div class="card mx-4" [ngClass]="uiService.isLightMode() ? 'bg-light text-dark' : 'bg-dark text-light'">
+    <div class="row no-gutters mb-3">
+      <div class="col-sm-5 d-flex justify-content-center">
+        <img class="card-img w-25" [src]="groupInfo!.iconUrl == null ? '/assets/images/default-group.png' : groupInfo!.iconUrl" [alt]="groupInfo!.name + ' logo'">
+      </div>
+      <div class="col-sm-7" >
+        <div class="card-body">
+          <h3 class="card-title fw-bold">{{groupInfo!.name}}</h3>
+          <p class="card-text" [ngClass]="groupInfo!.description == null ? 'text-muted' : ''" [innerText]="groupInfo!.description ?? groupInfo!.name + ' has no description'"></p>
+<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-feed [feedType]="groupService.getFeedType()" [name]="groupInfo!.name"></app-feed>
+</div>
