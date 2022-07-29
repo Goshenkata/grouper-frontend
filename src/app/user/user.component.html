@@ -33,6 +33,11 @@
                 (click)="changeDescription = !changeDescription">
           Change Description
         </button>
+        <button class="btn btn-sm btn-success d-block me-auto my-1"
+                *ngIf="!isPrincipalProfile && userService.isAdmin() && !isCurUserAdmin"
+        (click)="makeAdmin()">
+          Make Admin
+        </button>
       </div>
     </div>
   </div>

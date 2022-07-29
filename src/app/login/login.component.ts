@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('refresh_token', res.refresh_token)
         localStorage.setItem('username', res.username)
         localStorage.setItem('expires_at', res.expires_at.toString())
+        localStorage.setItem('role', res.role.toString())
       },
       error: (err: HttpErrorResponse) => {
         this.toastr.error(err.status == 401 ? 'Wrong email or password' : 'Something went wrong, try again later')

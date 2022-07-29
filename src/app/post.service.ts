@@ -27,4 +27,8 @@ export class PostService {
     }
     return this.http.post<StringJsonResponse>('http://localhost:8080/api/post/', formData)
   }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete('http://localhost:8080/api/post/' + id)
+  }
 }

@@ -3,7 +3,8 @@ export class LoginResponse {
     public access_token: string,
     public refresh_token: string,
     public expires_at: number,
-    public username: string
+    public username: string,
+    public role: string[]
   ) {
   }
 }

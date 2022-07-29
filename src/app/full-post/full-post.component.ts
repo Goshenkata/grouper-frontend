@@ -27,8 +27,12 @@ export class FullPostComponent implements OnInit {
       .subscribe({
         next: value => this.fullPost = value,
         error: err => {
-          this.toastr.error(err.status == 404 ? '404: Post not found' : 'Something went wrong, try again later')
-          this.router.navigate([""]);
+          if (err.status == 404) {
+            this.router.navigateByUrl('404');
+          } else {
+            this.toastr.error('Something went wrong, try again later')
+          }
+          this.router.navigateByUrl('/');
         }
       });
   }

@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "./post";
 import {UiService} from "../ui.service";
 import {FeedType} from "../feed/feed-type";
+import {UserService} from "../user.service";
+import {PostService} from "../post.service";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -16,7 +20,11 @@ export class PostComponent implements OnInit {
   uiService: UiService
   fullScreen: boolean;
 
-  constructor(uiService: UiService) {
+  constructor(uiService: UiService,
+              public router: Router,
+              public userService: UserService,
+              public postService: PostService,
+              public toastr: ToastrService) {
     this.uiService = uiService;
     this.fullScreen = false;
   }
@@ -32,4 +40,14 @@ export class PostComponent implements OnInit {
     return this.feedType == FeedType.USER
   }
 
+  delete(id: number) {
+    this.postService.delete(id)
+      .subscribe({
+        next: () => {
+          this.toastr.success('Post deleted successfully')
+          this.router.navigateByUrl('/')
+        },
+        error: () => this.toastr.error('Error deleting post')
+      })
+  }
 }

@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {SortType} from "./sort-type";
 import {UiService} from "../ui.service";
 import {FeedType} from "./feed-type";
+import {LoginResponse} from "../login/LoginResponse";
+import {parseJson} from "@angular/cli/utilities/json-file";
 
 @Component({
   selector: 'app-feed',

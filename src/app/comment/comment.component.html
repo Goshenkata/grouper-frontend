@@ -12,10 +12,10 @@
            [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
         <div class="card-body">
           <div>
-            <div class="d-inline-block d-sm-flex justify-content-between">
+            <div class="d-inline-block d-sm-flex justify-content-between mb-2">
               <small class="text-muted">
                 <img class="rounded-circle img pfp-icon me-2"
-                     [src]="comment.author.pfp == null ? 'assets/images/default-pfp.jpg' : comment.author.pfp"
+                     [src]="getRrc()"
                      alt="user pfp"/>
                 <a class="link-light"
                    [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"

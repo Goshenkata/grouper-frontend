@@ -23,7 +23,7 @@ export interface Comment {
 }
 
 export interface Author {
-  pfp: string | null;
+  pfp: Image | null;
   username: string;
   roles: Role[];
 }

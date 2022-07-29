@@ -23,6 +23,13 @@ export class CommentComponent implements OnInit {
 
   }
 
+  getRrc(): string {
+  if (this.comment.author.pfp == null) {
+    return 'assets/images/default-pfp.jpg'
+  }
+    return this.comment.author.pfp.url
+  }
+
   ngOnInit(): void {
   }
 

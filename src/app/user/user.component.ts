@@ -6,6 +6,7 @@ import {UserInfo} from "./user-info";
 import {ToastrService} from "ngx-toastr";
 import {LoadingService} from "../loading.service";
 import {ProfileWidgetComponent} from "../profile-widget/profile-widget.component";
+import {Roles} from "./roles";
 
 @Component({
   selector: 'app-user',
@@ -16,6 +17,7 @@ export class UserComponent implements OnInit {
   public userInfo: UserInfo | null = null
   public isPrincipalProfile: boolean = false;
   public changeDescription: boolean = false;
+  public isCurUserAdmin: boolean = false;
 
   constructor(private route: ActivatedRoute,
               public router: Router,
@@ -26,9 +28,11 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadingService.isLoading=false
+    this.loadingService.isLoading = false
     const routeParams = this.route.snapshot.paramMap;
     let username: string = routeParams!.get('user') ?? '';
+    this.isAdmin(username)
+
     this.userService.getInfo(username)
       .subscribe({
         next: value => {
@@ -84,5 +88,27 @@ export class UserComponent implements OnInit {
       return true;
     }
     return this.userInfo.description.length <= 1;
+  }
+
+
+  isAdmin(username: string) {
+    let role: Roles = {roles: ['ROLE_USER']}
+    this.userService.getUserRoles(username)
+      .subscribe({
+        next: value => {
+          role = value
+        },
+        error: err => console.log(err.status),
+        complete: () => this.isCurUserAdmin = role.roles.indexOf('ROLE_ADMIN') > -1
+      })
+  }
+
+  makeAdmin() {
+    if (this.userInfo != null) {
+      this.userService.makeAdmin(this.userInfo.name).subscribe({
+        error: err => this.toastr.error("Error making user admin, we're working on the issue")
+      })
+      this.isCurUserAdmin = true;
+    }
   }
 }

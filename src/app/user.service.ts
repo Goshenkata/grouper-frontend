@@ -7,6 +7,7 @@ import {LoginResponse} from "./login/LoginResponse";
 import {ProfileWidgetDto} from "./profile-widget/profile-widget-dto";
 import {UserInfo} from "./user/user-info";
 import {FeedType} from "./feed/feed-type";
+import {Roles} from "./user/roles";
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class UserService {
     localStorage.removeItem('username')
     localStorage.removeItem('refresh_token')
     localStorage.removeItem('expires_at')
+    localStorage.removeItem('role')
   }
 
   isLoggedOut(): boolean {
@@ -111,5 +113,34 @@ export class UserService {
 
   changeDescription(description: string | null): Observable<any> {
     return this.http.patch('http://localhost:8080/api/user/description', {description: description})
+  }
+
+  public isUser(): boolean {
+    let item: string | null = localStorage.getItem('role');
+    if (item == null) {
+      return false;
+    }
+    return item.split(',').indexOf('ROLE_USER') > -1;
+  }
+
+  public isAdmin(): boolean {
+    let item: string | null = localStorage.getItem('role');
+    if (item == null) {
+      return false;
+    }
+    return item.split(',').indexOf('ROLE_ADMIN') > -1;
+  }
+
+  updateRoles(): Observable<Roles> {
+    return this.http.get<Roles>('http://localhost:8080/api/user/roles')
+  }
+
+  getUserRoles(username: string): Observable<Roles> {
+    return this.http.get<Roles>('http://localhost:8080/api/user/roles/' + username)
+  }
+
+
+  makeAdmin(name: string): Observable<any> {
+    return this.http.patch('http://localhost:8080/api/user/roles/admin/' + name, null)
   }
 }

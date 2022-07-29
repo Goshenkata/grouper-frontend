@@ -7,7 +7,7 @@
     </div>
     <div [ngClass]="post.postType=='IMAGE' ? 'col-md-8' : 'col-md-12'">
       <div class="card-body">
-        <div class="d-inline-block d-sm-flex justify-content-between">
+        <div class="d-inline-block d-flex flex-column flex-md-row justify-content-between">
           <small class="text-muted">
             <span *ngIf="!isGroup()">
             <img class="rounded-circle img pfp-icon me-2"
@@ -25,7 +25,14 @@
                [href]="'/user/' + post.postAuthor.username">{{post.postAuthor.username}}</a>
             </span>
           </small>
-          <small class="text-muted">Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+          <small class="text-muted">
+            Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}
+            <button *ngIf="userService.isAdmin() || (userService.getUsername() == post.postAuthor.username)"
+                    (click)="delete(post.id)"
+                    class="btn btn-sm btn-danger mx-2">
+              <fa-icon icon="trash"></fa-icon><span class="ms-2 fw-bold d-none d-md-inline-block">Delete</span>
+            </button>
+          </small>
         </div>
         <h4 class="my-2">{{post.title}}</h4>
         <p class="card-text pt-2 pt-sm-0" [innerHTML]="post.content"></p>
