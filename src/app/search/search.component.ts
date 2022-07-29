@@ -4,6 +4,7 @@ import {SearchType} from "./SearchType";
 import {SearchService} from "../search.service";
 import {SearchDto} from "./search.dto";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NavigateService} from "../navigate.service";
 
 @Component({
   selector: 'app-search',
@@ -22,7 +23,8 @@ export class SearchComponent implements OnInit {
   constructor(public uiService: UiService,
               public searchService: SearchService,
               public router: Router,
-              public activatedRoute: ActivatedRoute) {
+              public activatedRoute: ActivatedRoute,
+              public navigateService: NavigateService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class SearchComponent implements OnInit {
 
   select(res: SearchDto) {
     if (!this.isLockedUser) {
-      this.redirectTo(this.searchType.toString().toLowerCase() + '/' + res.name)
+      this.navigateService.redirectTo(this.searchType.toString().toLowerCase() + '/' + res.name)
     }
     this.query = res.name;
     this.showDropdown = false;
@@ -81,8 +83,4 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  redirectTo(uri: string) {
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-      this.router.navigate([uri]));
-  }
 }

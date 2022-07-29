@@ -65,10 +65,15 @@ export class UserService {
     };
     return this.http.get<LoginResponse>("http://localhost:8080/api/user/refreshToken", requestOptions);
   }
+
   test(): String {
-   let end: String = 'fail';
-   this.http.get<String>("http://localhost:8080/api/user/test", this.httpOptions)
-      .subscribe({next: v => {end = v}})
+    let end: String = 'fail';
+    this.http.get<String>("http://localhost:8080/api/user/test", this.httpOptions)
+      .subscribe({
+        next: v => {
+          end = v
+        }
+      })
     console.log(end)
     return end;
   }
@@ -83,5 +88,28 @@ export class UserService {
 
   getFeedType(): FeedType {
     return FeedType.USER
+  }
+
+  getUsername() {
+    let item = localStorage.getItem('username');
+    if (item == null) {
+      console.error('user not logged in')
+      return
+    }
+    return item;
+  }
+
+  uploadNewPfp(file: File): Observable<any> {
+    let formData = new FormData();
+    formData.append('pfp', file)
+    return this.http.patch('http://localhost:8080/api/user/pfp', formData)
+  }
+
+  removePfp(): Observable<any> {
+    return this.http.delete('http://localhost:8080/api/user/pfp')
+  }
+
+  changeDescription(description: string | null): Observable<any> {
+    return this.http.patch('http://localhost:8080/api/user/description', {description: description})
   }
 }

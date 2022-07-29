@@ -12,6 +12,7 @@
     <small class="align-middle ms-3 me-4 h5 d-none d-sm-inline-block">{{profileWidgetDTO.username}}</small>
   </a>
   <div class="dropdown-menu small-dropdown" [ngClass]="expand ? uiService.isLightMode() ? ['bg-light', 'show'] : ['show', 'bg-dark'] : ''" aria-labelledby="navbarDropdownMenuLink">
+    <a class="dropdown-item pointer" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'" (click)="goToProfile()">My Profile</a>
     <a [ngClass]="uiService.isLightMode() ? 'btn-light text-dark' : 'btn-dark text-light'"
             class="dropdown-item"
             (click)="uiService.switchTheme()">

@@ -3,8 +3,6 @@ import {UiService} from "../ui.service";
 import {UserService} from "../user.service";
 import {ReplyTo} from "./ReplyTo";
 import {Reply} from "./reply";
-import {getTinymce} from "@tinymce/tinymce-angular/TinyMCE";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommentService} from "../comment.service";
 import {ToastrService} from "ngx-toastr";
 import {LoadingService} from "../loading.service";

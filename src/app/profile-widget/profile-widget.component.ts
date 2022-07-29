@@ -3,6 +3,7 @@ import {UiService} from "../ui.service";
 import {UserService} from "../user.service";
 import {ProfileWidgetDto} from "./profile-widget-dto";
 import {ToastrService} from "ngx-toastr";
+import {NavigateService} from "../navigate.service";
 
 
 @Component({
@@ -17,14 +18,17 @@ export class ProfileWidgetComponent implements OnInit {
 
   constructor(public uiService: UiService,
               public userService: UserService,
-              public toastr: ToastrService) {
-    userService.getProfileWidget()
+              public navigateService: NavigateService) {
+  }
+
+  ngOnInit(): void {
+    this.userService.getProfileWidget()
       .subscribe({
         next: value => this.profileWidgetDTO = value,
       });
   }
 
-  ngOnInit(): void {
+  goToProfile() {
+    this.navigateService.redirectTo('user/' + this.userService.getUsername())
   }
-
 }

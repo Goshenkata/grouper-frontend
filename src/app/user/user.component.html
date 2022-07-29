@@ -1,17 +1,41 @@
 <div class="container">
   <div class="card mx-4" [ngClass]="uiService.isLightMode() ? 'bg-light text-dark' : 'bg-dark text-light'">
     <div class="row no-gutters mb-3">
-      <div class="col-sm-5 d-flex justify-content-center">
-        <img class="card-img w-25" [src]="userInfo!.imageUrl == null ? '/assets/images/default-pfp.jpg' : userInfo!.imageUrl" [alt]="userInfo!.name + ' logo'">
-      </div>
-      <div class="col-sm-7" >
-        <div class="card-body">
-          <h3 class="card-title fw-bold">{{userInfo!.name}}</h3>
-          <p class="card-text" [ngClass]="userInfo!.description == null ? 'text-muted' : ''" [innerText]="userInfo!.description ?? userInfo!.name + ' has no description'"></p>
-          <!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+      <div class="col-md-5 text-center">
+        <img class="img w-50"
+             [src]="userInfo!.imageUrl == null ? '/assets/images/default-pfp.jpg' : userInfo!.imageUrl"
+             [alt]="userInfo!.name + ' profile picture'">
+        <div *ngIf="isPrincipalProfile" class="mt-2">
+          <label for="imageInput" class="btn-sm btn btn-primary my-1">Change profile picture</label>
+          <input name="file" type="file" id="imageInput" (change)="onFileSelected($event)"
+                 class="file-input visually-hidden d-block" accept=".png, .jpg, .jpeg, .webp"/>
+          <button class="btn btn-sm btn-danger d-block mx-auto my-1" *ngIf="userInfo!.imageUrl != null"
+                  (click)="removePfp()">Remove profile picture
+          </button>
         </div>
+      </div>
+      <div class="col-md-7 d-flex flex-column justify-content-around">
+        <div class="card-body ">
+          <h3 class="card-title fw-bold">{{userInfo!.name}}</h3>
+          <p class="card-text"
+             *ngIf="!changeDescription"
+             [ngClass]="checkIfBlank() ? 'text-muted' : ''"
+             [innerText]="checkIfBlank() ? userInfo!.name + ' has no description' : userInfo?.description"></p>
+          <form *ngIf="isPrincipalProfile && changeDescription">
+            <div class="mb-3">
+              <textarea class="form-control" rows="6" name="newDesc" [(ngModel)]="userInfo!.description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="changeDesc()">Change</button>
+          </form>
+        </div>
+        <button class="btn btn-sm btn-primary d-block me-auto my-1"
+                *ngIf="isPrincipalProfile && !changeDescription"
+                (click)="changeDescription = !changeDescription">
+          Change Description
+        </button>
       </div>
     </div>
   </div>
   <app-feed [feedType]="userService.getFeedType()" [name]="userInfo!.name"></app-feed>
 </div>
+<app-loading></app-loading>
