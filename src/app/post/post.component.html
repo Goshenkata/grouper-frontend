@@ -25,7 +25,7 @@
                [href]="'/user/' + post.postAuthor.username">{{post.postAuthor.username}}</a>
             </span>
           </small>
-          <small class="text-muted">
+          <small class="text-muted d-flex d-md-block justify-content-between">
             Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}
             <button *ngIf="userService.isAdmin() || (userService.getUsername() == post.postAuthor.username)"
                     (click)="delete(post.id)"

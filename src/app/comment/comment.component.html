@@ -4,7 +4,7 @@
        [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
   >
     <div class="row g-0">
-      <div *ngIf="comment.image != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'"
+      <div *ngIf="comment.image != null && comment.author != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'"
            (click)="fullScreen=!fullScreen">
         <img src="{{comment.image?.url}}" class="img-fluid rounded-start" alt="image of post">
       </div>
@@ -12,16 +12,23 @@
            [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
         <div class="card-body">
           <div>
-            <div class="d-inline-block d-sm-flex justify-content-between mb-2">
-              <small class="text-muted">
+            <div class="d-inline-block d-flex flex-column flex-md-row justify-content-between mb-2">
+              <small class="text-muted"
+                *ngIf="comment.author != null">
                 <img class="rounded-circle img pfp-icon me-2"
-                     [src]="getRrc()"
+                     [src]="getSrc()"
                      alt="user pfp"/>
                 <a class="link-light"
                    [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
-                   [href]="'/user/' + comment.author.username">{{comment.author.username}}</a>
+                   [href]="'/user/' + comment.author.username">{{comment.author.username ?? 'deleted'}}</a>
               </small>
-              <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}</small>
+              <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}
+                <button *ngIf="(canDelete())"
+                        (click)="delete(comment.id)"
+                        class="btn btn-sm btn-danger mx-2">
+                  <fa-icon icon="trash"></fa-icon><span class="ms-2 fw-bold d-none d-md-inline-block">Delete</span>
+                </button>
+              </small>
             </div>
             <p class="card-text pt-2 pt-sm-0" [innerHtml]="comment.contents"></p>
           </div>
@@ -39,6 +46,6 @@
   </div>
   <app-reply *ngIf="replyExpand" [id]="comment.id" [replyTo]="ReplyTo.COMMENT"></app-reply>
   <div *ngFor="let reply of comment.replies" class="ms-3">
-    <app-comment [comment]="reply"></app-comment>
+    <app-comment [isTopLevel]="false" [comment]="reply"></app-comment>
   </div>
 </section>

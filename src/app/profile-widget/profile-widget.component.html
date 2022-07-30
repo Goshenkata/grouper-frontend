@@ -12,14 +12,14 @@
     <small class="align-middle ms-3 me-4 h5 d-none d-sm-inline-block">{{profileWidgetDTO.username}}</small>
   </a>
   <div class="dropdown-menu small-dropdown" [ngClass]="expand ? uiService.isLightMode() ? ['bg-light', 'show'] : ['show', 'bg-dark'] : ''" aria-labelledby="navbarDropdownMenuLink">
-    <a class="dropdown-item pointer" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'" (click)="goToProfile()">My Profile</a>
-    <a [ngClass]="uiService.isLightMode() ? 'btn-light text-dark' : 'btn-dark text-light'"
+    <a class="dropdown-item pointer" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light hover-dark-mode'" (click)="goToProfile()">My Profile</a>
+    <a [ngClass]="uiService.isLightMode() ? 'btn-light text-dark' : 'btn-dark text-light hover-dark-mode'"
             class="dropdown-item"
             (click)="uiService.switchTheme()">
       <fa-icon [icon]="uiService.isLightMode() ? ['fas', 'moon'] : ['fas', 'sun']"
                class="fa-2xl mx-1 pointer"></fa-icon>
       <small class="h6">Theme</small>
     </a>
-    <a class="dropdown-item" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'" (click)="userService.logout()" href="#">Logout</a>
+    <a class="dropdown-item" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light hover-dark-mode'" (click)="userService.logout()" href="#">Logout</a>
   </div>
 </div>

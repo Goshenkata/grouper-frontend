@@ -22,4 +22,8 @@ export class CommentService {
     console.log(replyData)
     return this.http.post('http://localhost:8080/api/comment/add', formData);
   }
+
+  delete(id: number):Observable<any> {
+    return this.http.delete('http://localhost:8080/api/comment/' + id)
+  }
 }

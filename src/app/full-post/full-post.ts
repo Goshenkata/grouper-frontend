@@ -15,7 +15,7 @@ export interface FullPost {
 
 export interface Comment {
   id: number;
-  author: Author;
+  author: Author | null;
   image: Image;
   created: number;
   contents: string;
