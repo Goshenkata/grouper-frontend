@@ -6,6 +6,7 @@ import {UserService} from "../user.service";
 import {PostService} from "../post.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {LoadingService} from "../loading.service";
 
 @Component({
   selector: 'app-post',
@@ -24,7 +25,8 @@ export class PostComponent implements OnInit {
               public router: Router,
               public userService: UserService,
               public postService: PostService,
-              public toastr: ToastrService) {
+              public toastr: ToastrService,
+              public loadingService: LoadingService) {
     this.uiService = uiService;
     this.fullScreen = false;
   }
@@ -41,13 +43,15 @@ export class PostComponent implements OnInit {
   }
 
   delete(id: number) {
+    this.loadingService.isLoading = true
     this.postService.delete(id)
       .subscribe({
         next: () => {
           this.toastr.success('Post deleted successfully')
           this.router.navigateByUrl('/')
         },
-        error: () => this.toastr.error('Error deleting post')
+        error: () => this.toastr.error('Error deleting post'),
+        complete: () => this.loadingService.isLoading = false
       })
   }
 }

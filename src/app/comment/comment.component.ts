@@ -5,6 +5,7 @@ import {ReplyTo} from "../reply/ReplyTo";
 import {UserService} from "../user.service";
 import {CommentService} from "../comment.service";
 import {ToastrService} from "ngx-toastr";
+import {LoadingService} from "../loading.service";
 
 @Component({
   selector: 'app-comment',
@@ -24,7 +25,8 @@ export class CommentComponent implements OnInit {
   constructor(public uiService: UiService,
               public userService: UserService,
               public commentService: CommentService,
-              public toastr: ToastrService) {
+              public toastr: ToastrService,
+              public loadingService: LoadingService) {
     this.fullScreen = false;
 
   }
@@ -43,14 +45,15 @@ export class CommentComponent implements OnInit {
   }
 
   delete(id: number) {
-
+    this.loadingService.isLoading = true
     this.commentService.delete(id)
       .subscribe({
         next: () => {
           this.toastr.success('Comment deleted successfully')
           location.reload()
         },
-        error: () => this.toastr.error('Error deleting comment')
+        error: () => this.toastr.error('Error deleting comment'),
+        complete: () => this.loadingService.isLoading = false
       })
   }
 
