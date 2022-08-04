@@ -5,7 +5,7 @@ It supports comment chains in a tree-like structure, advanced post markup, diffe
 (ordinary users and site administrators). Auto-generated documentation with openAPI and much more!
 
 
-#Used Technologies
+# Used Technologies
 * Angular framework
 * [Spring backend api](https://github.com/Goshenkata/grouper-api)
 * JWT
