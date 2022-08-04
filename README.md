@@ -10,3 +10,14 @@ It supports comment chains in a tree-like structure, advanced post markup, diffe
 * [Spring backend api](https://github.com/Goshenkata/grouper-api)
 * JWT
 * Bootstrap
+
+
+# Gallery
+### Making a post
+![Making a post](post.png)
+- - -
+### Comments
+![commentS](comments.png)
+- - -
+### Feed
+![Feed view](feed.png)

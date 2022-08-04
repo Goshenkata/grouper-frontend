@@ -55,7 +55,8 @@ export class SubmitPostComponent implements OnInit {
           this.submitService.search = this.search
           this.errorMessage = err.error.response
         },
-        complete: () => this.loadingService.isLoading=false
+        complete: () => this.loadingService.isLoading = false
       })
+    this.loadingService.isLoading = false
   }
 }
