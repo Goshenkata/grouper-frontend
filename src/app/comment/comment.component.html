@@ -1,31 +1,23 @@
 <section class="m-0 ps-3 py-1 border-start rounded-start"
-         [ngClass]="uiService.isLightMode() ? 'border-light' : 'border-dark'">
-  <div class="card row"
-       [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
-  >
+  [ngClass]="uiService.isLightMode() ? 'border-light' : 'border-dark'">
+  <div class="card row" [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']">
     <div class="row g-0">
       <div *ngIf="comment.image != null && comment.author != null" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'"
-           (click)="fullScreen=!fullScreen">
+        (click)="fullScreen=!fullScreen">
         <img src="{{comment.image?.url}}" class="img-fluid rounded-start" alt="image of post">
       </div>
       <div class="d-flex flex-column justify-content-between"
-           [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
+        [ngClass]="comment.image != null ? 'col-md-8' : 'col-md-12'">
         <div class="card-body">
           <div>
             <div class="d-inline-block d-flex flex-column flex-md-row justify-content-between mb-2">
-              <small class="text-muted"
-                *ngIf="comment.author != null">
-                <img class="rounded-circle img pfp-icon me-2"
-                     [src]="getSrc()"
-                     alt="user pfp"/>
-                <a class="link-light"
-                   [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
-                   [href]="'/user/' + comment.author.username">{{comment.author.username ?? 'deleted'}}</a>
+              <small class="text-muted" *ngIf="comment.author != null">
+                <img class="rounded-circle img pfp-icon me-2" [src]="getSrc()" alt="user pfp" />
+                <a class="link-light" [ngClass]="uiService.isLightMode() ? 'text-dark hover-light-text' : 'text-light'"
+                  [href]="'/user/' + comment.author.username">{{comment.author.username ?? 'deleted'}}</a>
               </small>
               <small class="text-muted">Uploaded on {{comment.created * 1000 | date:'HH:mm, dd MMM yyyy'}}
-                <button *ngIf="(canDelete())"
-                        (click)="delete(comment.id)"
-                        class="btn btn-sm btn-danger mx-2">
+                <button *ngIf="(canDelete())" (click)="delete(comment.id)" class="btn btn-sm btn-danger mx-2">
                   <fa-icon icon="trash"></fa-icon><span class="ms-2 fw-bold d-none d-md-inline-block">Delete</span>
                 </button>
               </small>
@@ -35,8 +27,8 @@
         </div>
         <div *ngIf="userService.isLoggedIn()">
           <button class="btn fw-bold" (mouseover)="hovered = true" (mouseout)="hovered = false"
-                  [ngClass]="uiService.isLightMode() ? hovered ? 'bg-light text-dark' : 'bg-white text-dark': hovered ? 'bg-darkless text-light' :'bg-dark text-light'"
-                  (click)="replyExpand = !replyExpand">
+            [ngClass]="uiService.isLightMode() ? hovered ? 'bg-light text-dark' : 'bg-white text-dark': hovered ? 'bg-darkless text-light' :'bg-dark text-light'"
+            (click)="replyExpand = !replyExpand">
             <fa-icon [icon]="['fas','reply']"></fa-icon>
             Reply
           </button>

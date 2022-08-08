@@ -1,2 +1,36 @@
-<p>about works!</p>
-
+<div class="container col-10 my-2">
+  <h1 class="h1 text-center">Grouper Frontend</h1>
+  <p>An Angular frontend for Grouper, a social media like forum website
+    that allows users to post text and images to Group on various topics.
+    It supports comment chains in a tree-like structure, advanced post markup, differing user privileges
+    (ordinary users and site administrators). Auto-generated documentation with openAPI and much more!</p>
+  <small>
+    footnote: default admin has the username "admin" and password "Admin@123"
+  </small>
+  <h1 class="h1 text-center">Used Technologies</h1>
+  <ul class="text-center">
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2" src="assets/images/spring.png" alt="spring logo">
+    </li>
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2" src="assets/images/angular.png" alt="angular logo">
+    </li>
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2"
+      [src]="uiService.isLightMode() ?  'assets/images/jwt-dark.png' : 'assets/images/jwt-light.png'"
+      alt="jwt logo">
+    </li>
+    <br>
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2" src="assets/images/bootstrap.png" alt="bootstrap logo">
+    </li>
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2"
+      [src]="uiService.isLightMode() ?  'assets/images/mariadb-dark.png' : 'assets/images/mariadb-light.png'"
+      alt="jwt logo">
+    </li>
+    <li class="d-inline-block">
+      <img class="tech-logo img img-fluid m-2" src="assets/images/cloudinary.png" alt="cloudinary logo">
+    </li>
+  </ul>
+</div>

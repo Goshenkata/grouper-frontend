@@ -31,3 +31,12 @@
   width: 32px;
   height: 32px;
 }
+
+.hover-dark-mode:hover {
+  background-color: #2d3034;
+}
+
+
+.hover-light-text:hover {
+  color: lightgray !important;
+}

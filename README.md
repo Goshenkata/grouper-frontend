@@ -14,10 +14,10 @@ It supports comment chains in a tree-like structure, advanced post markup, diffe
 
 # Gallery
 ### Making a post
-![Making a post](post.png)
+![Making a post](./src/assets/images/post.png)
 - - -
 ### Comments
-![commentS](comments.png)
+![commentS](./src/assets/images/comments.png)
 - - -
 ### Feed
-![Feed view](feed.png)
+![Feed view](./src/assets/images/feed.png)
