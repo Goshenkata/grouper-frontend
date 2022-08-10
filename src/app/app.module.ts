@@ -32,6 +32,7 @@ import { GroupComponent } from './group/group.component';
 import { UserComponent } from './user/user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     UserComponent,
     NotFoundComponent,
     CreateGroupComponent,
+    StatisticsComponent,
   ],
     imports: [
         CommonModule,

@@ -10,6 +10,7 @@ import {SubmitPostComponent} from "./submit-post/submit-post.component";
 import {GroupComponent} from "./group/group.component";
 import {UserComponent} from "./user/user.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {StatisticsComponent} from "./statistics/statistics.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'submit', component: SubmitPostComponent},
   {path: 'group/:group', component: GroupComponent},
   {path: 'user/:user', component: UserComponent},
+  {path: 'statistics', component: StatisticsComponent},
   {path: '**', pathMatch: 'full', component: NotFoundComponent}
 ];
 

@@ -20,6 +20,7 @@
                class="fa-2xl mx-1 pointer"></fa-icon>
       <small class="h6">Theme</small>
     </a>
+    <a class="dropdown-item" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light hover-dark-mode'" (click)="goToStats()" href="#">Statistics</a>
     <a class="dropdown-item" [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light hover-dark-mode'" (click)="userService.logout()" href="#">Logout</a>
   </div>
 </div>
