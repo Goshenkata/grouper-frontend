@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {LegendPosition} from "@swimlane/ngx-charts";
 import {Observable, Subscription} from "rxjs";
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-statistics',
@@ -18,13 +19,13 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public toastr: ToastrService,
-    public statsService: StatsService
+    public statsService: StatsService,
+    public userService: UserService
   ) {
   }
 
   ngOnInit(): void {
-    let role: string | null = localStorage.getItem('role');
-    if (role == null || role.split(',').indexOf('ROLE_ADMIN') <= -1) {
+    if (!this.userService.isAdmin()) {
       this.router.navigateByUrl('')
     }
     this.refresh();
@@ -42,7 +43,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         },
         error: () => {
           this.router.navigateByUrl('')
-          this.toastr.error()
         },
       });
   }
