@@ -95,7 +95,7 @@ export class UserService {
   getUsername() {
     let item = localStorage.getItem('username');
     if (item == null) {
-      console.error('user not logged in')
+      console.error()
       return
     }
     return item;

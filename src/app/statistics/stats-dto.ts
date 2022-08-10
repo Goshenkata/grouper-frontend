@@ -1,6 +1,6 @@
 interface Percentage {
   name: string,
-  percentage: number
+  value: number
 }
 
 export interface StatsDto {

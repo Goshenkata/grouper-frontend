@@ -6,8 +6,6 @@ import {Router} from "@angular/router";
 import {SortType} from "./sort-type";
 import {UiService} from "../ui.service";
 import {FeedType} from "./feed-type";
-import {LoginResponse} from "../login/LoginResponse";
-import {parseJson} from "@angular/cli/utilities/json-file";
 
 @Component({
   selector: 'app-feed',
@@ -63,7 +61,7 @@ export class FeedComponent implements OnInit {
     return this.feedService.getFeed(this.page, this.size, this.feedService.sort, this.feedType , this.name)
       .subscribe({
         next: res => this.feed = this.feed.concat(res),
-        error: () => this.toastr.error("Something went wrong :("),
+        error: () => this.toastr.error(),
       })
   }
 
@@ -72,7 +70,7 @@ export class FeedComponent implements OnInit {
     return this.feedService.getFeed(this.page, this.size, this.feedService.sort, this.feedType, this.name)
       .subscribe({
         next: res => this.feed = res,
-        error: () => this.toastr.error("Something went wrong :("),
+        error: () => this.toastr.error(),
       })
   }
 }

@@ -50,7 +50,7 @@ export class PostComponent implements OnInit {
           this.toastr.success('Post deleted successfully')
           this.router.navigateByUrl('/')
         },
-        error: () => this.toastr.error('Error deleting post'),
+        error: () => this.toastr.error(),
         complete: () => this.loadingService.isLoading = false
       })
   }

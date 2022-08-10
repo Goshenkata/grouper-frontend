@@ -39,7 +39,7 @@ export class ReplyComponent implements OnInit {
     this.commentService.postComment(this.replyData)
       .subscribe({
         next: () => this.toastr.success('comment sent'),
-        error: err => (err.status == 400 ? this.toastr.error('comment cannot be blank') : this.toastr.error('Something went wrong')),
+        error: err => (err.status == 400 ? this.toastr.error() : this.toastr.error()),
         complete: () => {
           this.loadingService.isLoading = false;
           location.reload()

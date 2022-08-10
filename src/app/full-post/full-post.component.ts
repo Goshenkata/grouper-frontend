@@ -30,7 +30,7 @@ export class FullPostComponent implements OnInit {
           if (err.status == 404) {
             this.router.navigateByUrl('404');
           } else {
-            this.toastr.error('Something went wrong, try again later')
+            this.toastr.error()
           }
           this.router.navigateByUrl('/');
         }

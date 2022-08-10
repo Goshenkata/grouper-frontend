@@ -33,6 +33,7 @@ import { UserComponent } from './user/user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import {PieChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         InfiniteScrollModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PieChartModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

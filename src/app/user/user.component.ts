@@ -52,11 +52,11 @@ export class UserComponent implements OnInit {
     if (file != null) {
       this.userService.uploadNewPfp(file).subscribe({
         next: () => location.reload(),
-        error: () => this.toastr.error('Error uploading profile picture'),
+        error: () => this.toastr.error(),
         complete: () => this.loadingService.isLoading = false
       })
     } else {
-      this.toastr.error('Error uploading profile picture')
+      this.toastr.error()
       this.loadingService.isLoading = false
     }
   }
@@ -66,7 +66,7 @@ export class UserComponent implements OnInit {
     this.userService.removePfp()
       .subscribe({
         next: () => location.reload(),
-        error: () => this.toastr.error("Can't remove profile picture, we're working on it"),
+        error: () => this.toastr.error(),
         complete: () => this.loadingService.isLoading = false
       })
     this.loadingService.isLoading = false
@@ -76,7 +76,7 @@ export class UserComponent implements OnInit {
     this.changeDescription = false
     this.userService.changeDescription(this.userInfo!.description)
       .subscribe({
-        error: err => this.toastr.error('Error updating description')
+        error: err => this.toastr.error()
       })
   }
 
@@ -106,7 +106,7 @@ export class UserComponent implements OnInit {
   makeAdmin() {
     if (this.userInfo != null) {
       this.userService.makeAdmin(this.userInfo.name).subscribe({
-        error: err => this.toastr.error("Error making user admin, we're working on the issue")
+        error: err => this.toastr.error()
       })
       this.isCurUserAdmin = true;
     }

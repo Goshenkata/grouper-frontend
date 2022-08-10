@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
       .getQueryResult(this.query, this.searchType)
       .subscribe({
         next: value => this.result = value,
-        error: err => console.error('error ' + err.status + ' when fetching search')
+        error: err => console.error()
       })
   }
 

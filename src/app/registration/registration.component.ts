@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
         this.toastr.success("Registration successful, welcome!");
         this.router.navigate(["/login"])
       }, error: (err: HttpErrorResponse) => {
-        this.toastr.error(err.status == 400 ? err.error : 'Something went wrong, try again later');
+        this.toastr.error();
         console.log(err)
       }
     });

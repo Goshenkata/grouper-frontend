@@ -52,7 +52,7 @@ export class CommentComponent implements OnInit {
           this.toastr.success('Comment deleted successfully')
           location.reload()
         },
-        error: () => this.toastr.error('Error deleting comment'),
+        error: () => this.toastr.error(),
         complete: () => this.loadingService.isLoading = false
       })
   }
