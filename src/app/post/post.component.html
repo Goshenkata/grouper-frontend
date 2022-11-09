@@ -1,44 +1,77 @@
-<div class="m-3 card row"
-     [ngClass]="uiService.isLightMode() ? ['bg-white', 'text-dark'] : ['bg-dark', 'text-light']"
+<div
+  class="m-3 card row"
+  [ngClass]="
+    uiService.isLightMode()
+      ? ['bg-white', 'text-dark']
+      : ['bg-dark', 'text-light']
+  "
 >
   <div class="row g-0">
-    <div *ngIf="post.postType=='IMAGE'" [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'" (click)="fullScreen=!fullScreen">
-      <img src="{{post.image?.url}}" class="img-fluid rounded-start" alt="image of post">
+    <div
+      *ngIf="post.postType == 'IMAGE'"
+      [ngClass]="fullScreen ? 'col-md-12' : 'col-md-4'"
+      (click)="fullScreen = !fullScreen"
+    >
+      <img
+        src="{{ post.image?.url }}"
+        class="img-fluid rounded-start"
+        alt="image of post"
+      />
     </div>
-    <div [ngClass]="post.postType=='IMAGE' ? 'col-md-8' : 'col-md-12'">
+    <div [ngClass]="post.postType == 'IMAGE' ? 'col-md-8' : 'col-md-12'">
       <div class="card-body">
-        <div class="d-inline-block d-flex flex-column flex-md-row justify-content-between">
+        <div
+          class="d-inline-block d-flex flex-column flex-md-row justify-content-between"
+        >
           <small class="text-muted">
             <span *ngIf="!isGroup()">
-            <img class="rounded-circle img pfp-icon me-2"
-                 [src]="post.group.iconUrl == null ? 'assets/images/default-group.png' : post.group.iconUrl"
-                 alt="group icon"/>
-            <a class="link-light"
-               [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
-               [href]="'/group/' + post.group.name">{{post.group.name}}</a>
+              <img
+                class="rounded-circle img pfp-icon me-2"
+                [src]="
+                  post.group.iconUrl == null
+                    ? 'assets/images/default-group.png'
+                    : post.group.iconUrl
+                "
+                alt="group icon"
+              />
+              <a
+                class="link-light"
+                [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+                [href]="'/group/' + post.group.name"
+                >{{ post.group.name }}</a
+              >
             </span>
             <div class="vr mx-1" *ngIf="!(isGroup() || isUser())"></div>
             <span *ngIf="!isUser()">Posted by </span>
             <span *ngIf="!isUser()">
-            <a class="link-light"
-               [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
-               [href]="'/user/' + post.postAuthor.username">{{post.postAuthor.username}}</a>
+              <a
+                class="link-light"
+                [ngClass]="uiService.isLightMode() ? 'text-dark' : 'text-light'"
+                [href]="'/user/' + post.postAuthor.username"
+                >{{ post.postAuthor.username }}</a
+              >
             </span>
           </small>
           <small class="text-muted d-flex d-md-block justify-content-between">
-            Uploaded on {{post.created * 1000 | date:'HH:mm, dd MMM yyyy'}}
-            <button *ngIf="userService.isAdmin() || (userService.getUsername() == post.postAuthor.username)"
-                    (click)="delete(post.id)"
-                    class="btn btn-sm btn-danger mx-2">
-              <fa-icon icon="trash"></fa-icon><span class="ms-2 fw-bold d-none d-md-inline-block">Delete</span>
+            Uploaded on {{ post.created * 1000 | date: "HH:mm, dd MMM yyyy" }}
+            <button
+              *ngIf="
+                userService.isAdmin() ||
+                userService.getUsername() == post.postAuthor.username
+              "
+              (click)="delete(post.id)"
+              class="btn btn-sm btn-danger mx-2"
+            >
+              <fa-icon icon="trash"></fa-icon
+              ><span class="ms-2 fw-bold d-none d-md-inline-block">Delete</span>
             </button>
           </small>
         </div>
-        <h4 class="my-2">{{post.title}}</h4>
+        <h4 class="my-2">{{ post.title }}</h4>
         <p class="card-text pt-2 pt-sm-0" [innerHTML]="post.content"></p>
         <p class="card-text d-inline-block">
-          <small class="text-muted">{{post.commentCount}} comments</small></p>
-        <p class="card-text"></p>
+          <small class="text-muted">{{ post.commentCount }} comments</small>
+        </p>
       </div>
     </div>
   </div>

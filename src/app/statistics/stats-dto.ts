@@ -6,7 +6,6 @@ interface Percentage {
 export interface StatsDto {
   totalRequest: number;
   requestsInLastDay: number;
-  devicePercentages: Percentage[];
   browserPercentages: Percentage[];
   platformPercentages: Percentage[];
 }
